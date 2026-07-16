@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta de marca Campus360 — verificada por muestreo de píxeles del export de Figma */
+  --c360-teal-oscuro: #2B6477;
+  --c360-teal-oscuro-2: #1F5567;
+  --c360-teal: #1B5E7B;
+  --c360-coral: #2B6477;
+  --c360-lima: #2B6477;
+  --c360-crema: #FFFFFF;
+  --c360-sage: #E8F0E5;
+
+  /* Paleta secundaria — para diferenciar categorías/estados sin perder identidad de marca */
+  --c360-accent-amber: #D9A441;   /* alertas, premium, urgente, "para tu carrera" */
+  --c360-accent-sage: #6B8F71;    /* gratuito, tutorías, éxito secundario */
+  --c360-accent-rose: #B5566B;    /* vida universitaria, empresas, alta prioridad */
+  --c360-accent-lavender: #7A6FA6; /* investigación, informativo */
+  --c360-accent-skyblue: #7FB3C7; /* webinars, elementos virtuales */
+  --background: var(--c360-crema);
+  --foreground: #171717;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-c360-verde: var(--c360-teal-oscuro);
+  --color-c360-teal: var(--c360-teal);
+  --color-c360-coral: var(--c360-coral);
+  --color-c360-lima: var(--c360-lima);
+  --color-c360-crema: var(--c360-crema);
+  --color-c360-sage: var(--c360-sage);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.font-serif-brand {
+  font-family: var(--font-serif);
+}
+
+.font-mono-brand {
+  font-family: var(--font-mono);
+}
+
+/* Textura de grid sutil para fondos oscuros tipo portada */
+.c360-grid-bg {
+  background-color: var(--c360-teal-oscuro);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Foco de teclado visible en toda la app (accesibilidad) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #2B6477;
+  outline-offset: 2px;
+  border-radius: 2px;
+}

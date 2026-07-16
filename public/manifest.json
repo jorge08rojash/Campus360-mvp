@@ -1,0 +1,12 @@
+{
+  "name": "Campus360 — Toda tu universidad, en un lugar",
+  "short_name": "Campus360",
+  "description": "Plataforma de acompañamiento universitario de la Universidad Fidélitas",
+  "start_url": "/login",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#2B6477",
+  "icons": [
+    { "src": "/icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
