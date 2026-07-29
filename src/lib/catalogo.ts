@@ -28,6 +28,7 @@ export type SheetItem = {
   attendeeCount: number;
   profesor?: string;
   costo?: string;
+  imagen?: string;
 };
 
 const PALETA = ['#FF6B5B', '#8FA8FF', '#3DDBB0', '#C88FFF', '#F4C93F'];
@@ -65,6 +66,24 @@ function avataresDe(nombres: { nombre: string; iniciales: string }[], seed: stri
   return nombres.slice(0, 4).map((n, i) => ({ ini: n.iniciales, bg: colorPara(seed, i) }));
 }
 
+/** Fotos reales extraídas del prototipo de diseño (design-handoff/project/.image-slots.state.json),
+ * guardadas en public/campus360/covers/. Cubre un subconjunto de items — el resto sigue usando el
+ * degradado + inicial de CoverPhoto como fallback. */
+const IMAGENES: Record<string, string> = {
+  e1: '/campus360/covers/e1.webp',
+  e2: '/campus360/covers/e2.webp',
+  e3: '/campus360/covers/e3.webp',
+  e4: '/campus360/covers/e4.webp',
+  e6: '/campus360/covers/e6.webp',
+  e7: '/campus360/covers/e7.webp',
+  b1: '/campus360/covers/b1.webp',
+  b2: '/campus360/covers/b2.webp',
+  b3: '/campus360/covers/b3.webp',
+  tut1: '/campus360/covers/tut1.webp',
+  tut2: '/campus360/covers/tut2.webp',
+  tut3: '/campus360/covers/tut3.webp',
+};
+
 function deEvento(e: Evento): SheetItem {
   return {
     id: e.id,
@@ -82,6 +101,7 @@ function deEvento(e: Evento): SheetItem {
       e.id
     ),
     attendeeCount: e.inscritos,
+    imagen: IMAGENES[e.id],
   };
 }
 
@@ -130,6 +150,7 @@ function deOportunidad(): SheetItem[] {
     puntos: 0,
     attendees: [],
     attendeeCount: 0,
+    imagen: IMAGENES[x.id],
   }));
   const c = certificaciones.map((x) => ({
     id: x.id,
@@ -181,6 +202,7 @@ function deTutoria(): SheetItem[] {
     attendeeCount: 0,
     profesor: t.profesor,
     costo: t.costo,
+    imagen: IMAGENES[t.id],
   }));
 }
 

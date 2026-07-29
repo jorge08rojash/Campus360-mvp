@@ -76,7 +76,7 @@ export default function BottomSheetDetail() {
           ✕
         </button>
 
-        <CoverPhoto tag={item.tag} colorFg={item.tagFg} height={150} className="mb-3.5" />
+        <CoverPhoto tag={item.tag} colorFg={item.tagFg} imagenUrl={item.imagen} height={150} className="mb-3.5" />
 
         <span
           className="mb-2.5 inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold"

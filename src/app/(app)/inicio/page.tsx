@@ -112,10 +112,15 @@ export default function InicioPage() {
           </button>
           {hoy.map((s) => (
             <button key={s.id} onClick={() => abrirFicha('evento', s.id)} className="flex w-[62px] shrink-0 flex-col items-center gap-1.5">
-              <div className="h-[58px] w-[58px] rounded-full p-[2.5px]" style={{ background: `linear-gradient(135deg, ${s.tagFg}, var(--c360-accent))` }}>
-                <div className="flex h-full w-full items-center justify-center rounded-full" style={{ background: 'var(--c360-bg)' }}>
-                  <span className="text-[10px] font-bold" style={{ color: s.tagFg }}>{s.tag[0]}</span>
-                </div>
+              <div className="h-[58px] w-[58px] overflow-hidden rounded-full p-[2.5px]" style={{ background: `linear-gradient(135deg, ${s.tagFg}, var(--c360-accent))` }}>
+                {s.imagen ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={s.imagen} alt={s.titulo} className="h-full w-full rounded-full object-cover" />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center rounded-full" style={{ background: 'var(--c360-bg)' }}>
+                    <span className="text-[10px] font-bold" style={{ color: s.tagFg }}>{s.tag[0]}</span>
+                  </div>
+                )}
               </div>
               <span className="text-center text-[10.5px] font-semibold leading-tight" style={{ color: 'var(--c360-text2)' }}>{s.titulo.split(' ').slice(0, 2).join(' ')}</span>
             </button>
@@ -144,7 +149,7 @@ export default function InicioPage() {
         <div key={i} className="mb-3.5 rounded-3xl p-4" style={{ background: 'var(--c360-surface)' }}>
           {f.tipo === 'evento' && f.item && (
             <>
-              <CoverPhoto tag={f.item.tag} colorFg={f.item.tagFg} className="mb-3" />
+              <CoverPhoto tag={f.item.tag} colorFg={f.item.tagFg} imagenUrl={f.item.imagen} className="mb-3" />
               <div className="mb-2 flex items-center gap-2">
                 <span className="inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold" style={{ background: f.item.tagBg, color: f.item.tagFg }}>{f.item.tag}</span>
                 <span className="text-[11.5px]" style={{ color: 'var(--c360-text2)' }}>{f.item.when}</span>

@@ -55,7 +55,7 @@ export default function DescubrirPage() {
             className="flex flex-col gap-2 rounded-[20px] p-3 text-left"
             style={{ background: 'var(--c360-surface)' }}
           >
-            <CoverPhoto tag={d.tag} colorFg={d.tagFg} height={92} radius={14} />
+            <CoverPhoto tag={d.tag} colorFg={d.tagFg} imagenUrl={d.imagen} height={92} radius={14} />
             <span className="inline-flex w-fit rounded-full px-2 py-[3px] text-[9.5px] font-bold" style={{ background: d.tagBg, color: d.tagFg }}>{d.tag}</span>
             <div className="text-[12.5px] font-bold leading-tight" style={{ color: 'var(--c360-accent)' }}>{d.titulo}</div>
             <div className="text-[10.5px]" style={{ color: 'var(--c360-text2)' }}>{d.when}</div>
