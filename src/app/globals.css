@@ -84,3 +84,73 @@ select:focus-visible,
   outline-offset: 2px;
   border-radius: 2px;
 }
+
+/* ============================================
+   Campus360 móvil — súper-app de experiencia estudiantil
+   Tokens de tema (oscuro/claro) validados en el prototipo de diseño.
+   ============================================ */
+.c360 {
+  --c360-bg: #152238;
+  --c360-surface: #1D2E4A;
+  --c360-surface2: #28405F;
+  --c360-border: rgba(255, 255, 255, 0.08);
+  --c360-text: #F6F1E8;
+  --c360-text2: rgba(246, 241, 232, 0.62);
+  --c360-text3: rgba(246, 241, 232, 0.4);
+  --c360-accent: #F4C93F;
+  --c360-accent-fg: #152238;
+  background: var(--c360-bg);
+  color: var(--c360-text);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.c360[data-theme='light'] {
+  --c360-bg: #DDE3EA;
+  --c360-surface: #EFF3F7;
+  --c360-surface2: #CBD6E0;
+  --c360-border: rgba(15, 35, 60, 0.1);
+  --c360-text: #152238;
+  --c360-text2: rgba(21, 34, 56, 0.62);
+  --c360-text3: rgba(21, 34, 56, 0.38);
+  --c360-accent: #C9971F;
+  --c360-accent-fg: #152238;
+}
+
+.c360-heading {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+@keyframes c360-confetti-fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(340px) rotate(360deg); opacity: 0; }
+}
+@keyframes c360-pop-in {
+  0% { transform: scale(0.85); opacity: 0; }
+  60% { transform: scale(1.04); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes c360-slide-up {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+@keyframes c360-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes c360-pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 201, 63, 0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(244, 201, 63, 0); }
+}
+
+.c360-no-scrollbar::-webkit-scrollbar { display: none; }
+.c360-no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+
+.c360-scroll-gold::-webkit-scrollbar { width: 5px; }
+.c360-scroll-gold::-webkit-scrollbar-track { background: transparent; }
+.c360-scroll-gold::-webkit-scrollbar-thumb { background: rgba(244, 201, 63, 0.45); border-radius: 999px; }
+.c360-scroll-gold { scrollbar-width: thin; scrollbar-color: rgba(244, 201, 63, 0.45) transparent; }
+
+.c360-scroll-page::-webkit-scrollbar { width: 5px; }
+.c360-scroll-page::-webkit-scrollbar-track { background: transparent; }
+.c360-scroll-page::-webkit-scrollbar-thumb { background: rgba(148, 178, 220, 0.3); border-radius: 999px; }
+.c360-scroll-page { scrollbar-width: thin; scrollbar-color: rgba(148, 178, 220, 0.3) transparent; }
