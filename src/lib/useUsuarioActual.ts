@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Perfil } from './supabase';
+import { supabase, Perfil } from './supabase';
 
 export function useUsuarioActual() {
   const [usuario, setUsuario] = useState<Perfil | null>(null);
@@ -10,17 +10,43 @@ export function useUsuarioActual() {
   const router = useRouter();
 
   useEffect(() => {
-    const guardado = localStorage.getItem('campus360_usuario');
-    if (!guardado) {
-      router.push('/login');
-      return;
+    let activo = true;
+
+    async function cargarPerfil(userId: string) {
+      const { data } = await supabase.from('perfiles').select('*').eq('id', userId).single();
+      if (activo) {
+        setUsuario(data);
+        setCargando(false);
+      }
     }
-    setUsuario(JSON.parse(guardado));
-    setCargando(false);
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!activo) return;
+      if (!session) {
+        router.push('/login');
+        setCargando(false);
+        return;
+      }
+      cargarPerfil(session.user.id);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_evento, session) => {
+      if (!session) {
+        setUsuario(null);
+        router.push('/login');
+        return;
+      }
+      cargarPerfil(session.user.id);
+    });
+
+    return () => {
+      activo = false;
+      listener.subscription.unsubscribe();
+    };
   }, [router]);
 
   function cerrarSesion() {
-    localStorage.removeItem('campus360_usuario');
+    supabase.auth.signOut();
     router.push('/login');
   }
 

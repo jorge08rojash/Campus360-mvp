@@ -2,12 +2,15 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
 
 export default function Splash() {
   const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.getItem('campus360_usuario')) router.replace('/inicio');
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) router.replace('/inicio');
+    });
   }, [router]);
 
   return (

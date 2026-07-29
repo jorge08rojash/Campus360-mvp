@@ -1,17 +1,29 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase, Perfil } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { usePageTitle } from '@/lib/usePageTitle';
 
 const DEMO_PASSWORD = 'campus360';
 
+// Lista fija solo para mostrar el picker de cuentas demo — ya no se puede
+// consultar `perfiles` sin sesión porque la tabla tiene RLS activo.
+const PERFILES_DEMO = [
+  { nombre: 'Andrea Solís', correo: 'andrea.solis@ufidelitas.ac.cr' },
+  { nombre: 'Andrés Hidalgo', correo: 'andres.hidalgo@ufidelitas.ac.cr' },
+  { nombre: 'Andrés Rojas', correo: 'andres.rojas@ufidelitas.ac.cr' },
+  { nombre: 'Emilio Mora', correo: 'emilio.mora@ufidelitas.ac.cr' },
+  { nombre: 'Jorge Ureña', correo: 'jorge.urena@ufidelitas.ac.cr' },
+  { nombre: 'Kevin Chaves', correo: 'kevin.chaves@ufidelitas.ac.cr' },
+  { nombre: 'Luis Mora', correo: 'luis.mora@ufidelitas.ac.cr' },
+  { nombre: 'María Fernández', correo: 'maria.fernandez@ufidelitas.ac.cr' },
+  { nombre: 'Sofía Loaiza', correo: 'sofia.loaiza@ufidelitas.ac.cr' },
+  { nombre: 'Suri González', correo: 'suri.gonzalez@ufidelitas.ac.cr' },
+];
+
 export default function LoginPage() {
   usePageTitle('Iniciar sesión');
-  const [perfiles, setPerfiles] = useState<Perfil[]>([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const [correo, setCorreo] = useState('andres.rojas@ufidelitas.ac.cr');
   const [clave, setClave] = useState('');
@@ -21,39 +33,23 @@ export default function LoginPage() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    async function cargarPerfiles() {
-      const { data, error } = await supabase.from('perfiles').select('*').order('nombre');
-      if (error) setError(error.message);
-      else setPerfiles(data || []);
-      setCargando(false);
-    }
-    cargarPerfiles();
-  }, []);
-
-  function entrarComo(perfil: Perfil) {
-    localStorage.setItem('campus360_usuario', JSON.stringify(perfil));
-    router.push('/inicio');
-  }
-
-  function manejarSubmit(e: React.FormEvent) {
+  async function manejarSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErrorLogin(null);
     setEnviando(true);
-    setTimeout(() => {
-      const perfil = perfiles.find((p) => p.correo.toLowerCase() === correo.trim().toLowerCase());
-      if (!perfil) {
-        setErrorLogin('No encontramos ese correo institucional. Probá con uno de los perfiles de prueba.');
-        setEnviando(false);
-        return;
-      }
-      if (clave !== DEMO_PASSWORD) {
-        setErrorLogin('Contraseña incorrecta. Pista: es la contraseña de prueba de todos los perfiles demo.');
-        setEnviando(false);
-        return;
-      }
-      entrarComo(perfil);
-    }, 400);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: correo.trim().toLowerCase(),
+      password: clave,
+    });
+
+    if (error) {
+      setErrorLogin('No pudimos iniciar sesión. Revisá el correo institucional y la contraseña.');
+      setEnviando(false);
+      return;
+    }
+
+    router.push('/inicio');
   }
 
   return (
@@ -63,50 +59,40 @@ export default function LoginPage() {
         <div className="mt-1 text-[12.5px] text-[#F6F1E8]/60">Universidad Fidélitas · Costa Rica</div>
       </div>
 
-      {cargando && <p className="text-sm text-[#F6F1E8]/50">Cargando usuarios...</p>}
-      {error && (
-        <div className="rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
-          <p className="font-medium">No se pudieron cargar los perfiles</p>
-          <p className="mt-1">{error}</p>
+      <form onSubmit={manejarSubmit} className="flex flex-col gap-4">
+        <div>
+          <div className="mb-1.5 text-xs font-semibold text-[#F6F1E8]/60">Correo institucional</div>
+          <input
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
+            placeholder="ejemplo@ufidelitas.ac.cr"
+            className="w-full rounded-2xl border border-white/10 bg-[#1D2E4A] px-3.5 py-3 text-sm text-[#F6F1E8] outline-none box-border"
+          />
         </div>
-      )}
-
-      {!cargando && !error && (
-        <form onSubmit={manejarSubmit} className="flex flex-col gap-4">
-          <div>
-            <div className="mb-1.5 text-xs font-semibold text-[#F6F1E8]/60">Correo institucional</div>
-            <input
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
-              placeholder="ejemplo@ufidelitas.ac.cr"
-              className="w-full rounded-2xl border border-white/10 bg-[#1D2E4A] px-3.5 py-3 text-sm text-[#F6F1E8] outline-none box-border"
-            />
+        <div>
+          <div className="mb-1.5 flex items-baseline justify-between">
+            <span className="text-xs font-semibold text-[#F6F1E8]/60">Contraseña</span>
+            <span className="text-[11.5px] font-semibold text-[#F4C93F]">¿Olvidaste tu contraseña?</span>
           </div>
-          <div>
-            <div className="mb-1.5 flex items-baseline justify-between">
-              <span className="text-xs font-semibold text-[#F6F1E8]/60">Contraseña</span>
-              <span className="text-[11.5px] font-semibold text-[#F4C93F]">¿Olvidaste tu contraseña?</span>
-            </div>
-            <input
-              value={clave}
-              onChange={(e) => setClave(e.target.value)}
-              type="password"
-              placeholder="••••••••"
-              className="w-full rounded-2xl border border-white/10 bg-[#1D2E4A] px-3.5 py-3 text-sm text-[#F6F1E8] outline-none box-border"
-            />
-          </div>
+          <input
+            value={clave}
+            onChange={(e) => setClave(e.target.value)}
+            type="password"
+            placeholder="••••••••"
+            className="w-full rounded-2xl border border-white/10 bg-[#1D2E4A] px-3.5 py-3 text-sm text-[#F6F1E8] outline-none box-border"
+          />
+        </div>
 
-          {errorLogin && <p className="rounded-lg border border-red-400/30 bg-red-400/10 px-3 py-2 text-xs text-red-300">{errorLogin}</p>}
+        {errorLogin && <p className="rounded-lg border border-red-400/30 bg-red-400/10 px-3 py-2 text-xs text-red-300">{errorLogin}</p>}
 
-          <button
-            type="submit"
-            disabled={enviando}
-            className="mt-1.5 w-full rounded-full bg-[#F4C93F] py-[15px] text-[14.5px] font-bold text-[#152238] disabled:opacity-60"
-          >
-            {enviando ? 'Ingresando...' : 'Iniciar sesión →'}
-          </button>
-        </form>
-      )}
+        <button
+          type="submit"
+          disabled={enviando}
+          className="mt-1.5 w-full rounded-full bg-[#F4C93F] py-[15px] text-[14.5px] font-bold text-[#152238] disabled:opacity-60"
+        >
+          {enviando ? 'Ingresando...' : 'Iniciar sesión →'}
+        </button>
+      </form>
 
       <div className="my-2 flex items-center gap-2.5">
         <div className="h-px flex-1 bg-white/10" />
@@ -138,9 +124,9 @@ export default function LoginPage() {
           <p className="mb-1.5 text-[11px] text-[#F6F1E8]/50">
             Contraseña para todos los perfiles: <span className="font-mono text-[#F6F1E8]/80">{DEMO_PASSWORD}</span>
           </p>
-          {perfiles.map((p) => (
+          {PERFILES_DEMO.map((p) => (
             <button
-              key={p.id}
+              key={p.correo}
               type="button"
               onClick={() => {
                 setCorreo(p.correo);
