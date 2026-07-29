@@ -77,7 +77,7 @@ export default function AsistentePage() {
     <div className="flex h-full flex-col box-border" style={{ paddingTop: 54 }}>
       <div className="flex shrink-0 items-center gap-2.5 border-b px-4 pb-3.5" style={{ borderColor: 'var(--c360-border)' }}>
         <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full" style={{ background: 'var(--c360-accent)' }}>
-          <Image src="/campus360/rasta-mascot.png" alt="Rasta" width={36} height={36} className="h-full w-full object-contain" />
+          <Image src="/campus360/rasta-mascot.webp" alt="Rasta" width={36} height={36} className="h-full w-full object-contain" />
         </div>
         <div>
           <div className="text-[14.5px] font-bold">Rasta</div>

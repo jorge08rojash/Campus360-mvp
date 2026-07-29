@@ -41,7 +41,7 @@ export default function BottomTabBar() {
             animation: 'c360-pulse-glow 2.4s ease-in-out infinite',
           }}
         >
-          <Image src="/campus360/rasta-mascot.png" alt="Rasta" width={54} height={54} className="h-full w-full object-contain" />
+          <Image src="/campus360/rasta-mascot.webp" alt="Rasta" width={54} height={54} className="h-full w-full object-contain" />
         </div>
         <span className="text-[10px] font-bold" style={{ color: 'var(--c360-accent)' }}>Rasta</span>
       </Link>
