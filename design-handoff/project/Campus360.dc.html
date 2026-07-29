@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    body{margin:0}
+    @keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(340px) rotate(360deg);opacity:0}}
+    @keyframes popIn{0%{transform:scale(0.85);opacity:0}60%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
+    @keyframes slideUp{0%{transform:translateY(100%)}100%{transform:translateY(0)}}
+    @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(244,201,63,0.3)}50%{box-shadow:0 0 0 8px rgba(244,201,63,0)}}
+    .no-scrollbar::-webkit-scrollbar{display:none}
+    .chat-scroll::-webkit-scrollbar{width:5px}
+    .chat-scroll::-webkit-scrollbar-track{background:transparent}
+    .chat-scroll::-webkit-scrollbar-thumb{background:rgba(244,201,63,0.45);border-radius:999px}
+    .chat-scroll::-webkit-scrollbar-thumb:hover{background:rgba(244,201,63,0.7)}
+    .chat-scroll{scrollbar-width:thin;scrollbar-color:rgba(244,201,63,0.45) transparent}
+    .page-scroll::-webkit-scrollbar{width:5px}
+    .page-scroll::-webkit-scrollbar-track{background:transparent}
+    .page-scroll::-webkit-scrollbar-thumb{background:rgba(148,178,220,0.3);border-radius:999px}
+    .page-scroll::-webkit-scrollbar-thumb:hover{background:rgba(148,178,220,0.5)}
+    .page-scroll{scrollbar-width:thin;scrollbar-color:rgba(148,178,220,0.3) transparent}
+  </style>
+</helmet>
+<div style="min-height:100vh;background:#EFEBE3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;padding:60px 20px;box-sizing:border-box;">
+  <div style="text-align:center;">
+    <div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,0,0,0.38);font-weight:700;">Prototipo interactivo</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:#152238;margin-top:4px;">Campus360 — Universidad Fidélitas</div>
+  </div>
+  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" dark="{{ isDark }}" hint-size="402,874" style="box-shadow:0 40px 90px rgba(0,0,0,0.22);border-radius:48px;">
+    <div style="--bg:{{ bgColor }};--surface:{{ surfaceColor }};--surface2:{{ surface2Color }};--border:{{ borderColor }};--text:{{ textColor }};--text2:{{ text2Color }};--text3:{{ text3Color }};--accent:{{ accentColor }};background:var(--bg);color:var(--text);height:100%;display:flex;flex-direction:column;font-family:'Plus Jakarta Sans',system-ui,sans-serif;position:relative;overflow:hidden;box-sizing:border-box;">
+
+      <sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
+        <div style="height:100%;background:#152238;position:relative;overflow:hidden;box-sizing:border-box;">
+          <div style="position:absolute;top:30px;left:0;right:0;height:210px;">
+            <div style="position:absolute;top:20px;left:-30px;width:140px;height:140px;border-radius:50%;background:rgba(244,201,63,0.16);"></div>
+            <div style="position:absolute;top:0px;left:70px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+            <div style="position:absolute;top:50px;left:150px;width:100px;height:100px;border-radius:50%;background:rgba(255,107,91,0.14);"></div>
+            <div style="position:absolute;top:10px;left:230px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+            <div style="position:absolute;top:70px;left:300px;width:90px;height:90px;border-radius:50%;background:rgba(61,219,176,0.12);"></div>
+          </div>
+          <div style="position:absolute;top:400px;left:-40px;width:150px;height:150px;border-radius:50%;background:rgba(244,201,63,0.09);filter:blur(6px);"></div>
+          <div style="position:absolute;top:520px;left:260px;width:170px;height:170px;border-radius:50%;background:rgba(61,219,176,0.08);filter:blur(6px);"></div>
+          <div style="position:absolute;top:640px;left:60px;width:110px;height:110px;border-radius:50%;background:rgba(255,107,91,0.08);filter:blur(6px);"></div>
+          <div style="position:absolute;top:78px;left:32px;width:12px;height:12px;border-radius:50%;background:var(--accent);opacity:0.9;"></div>
+          <div style="position:absolute;top:140px;left:190px;width:8px;height:8px;border-radius:50%;background:var(--accent);opacity:0.7;"></div>
+          <div style="position:absolute;top:100px;left:300px;width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:0.6;"></div>
+          <div style="position:absolute;top:200px;left:110px;width:9px;height:9px;border-radius:50%;background:var(--accent);opacity:0.7;"></div>
+          <div style="position:absolute;top:250px;left:330px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0.55;"></div>
+          <div style="position:absolute;top:320px;left:50px;width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:0.6;"></div>
+          <div style="position:absolute;top:420px;left:340px;width:8px;height:8px;border-radius:50%;background:var(--accent);opacity:0.55;"></div>
+          <div style="position:absolute;top:480px;left:70px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0.5;"></div>
+          <div style="position:absolute;top:560px;left:290px;width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:0.5;"></div>
+          <div style="position:absolute;top:620px;left:150px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0.45;"></div>
+          <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:40px;box-sizing:border-box;text-align:center;">
+          <svg width="88" height="88" viewBox="0 0 100 100" style="filter:drop-shadow(0 10px 20px rgba(244,201,63,0.25));">
+            <circle cx="50" cy="50" r="48" fill="#0D1420"></circle>
+            <circle cx="50" cy="50" r="37" fill="#152238"></circle>
+            <circle cx="50" cy="50" r="31" fill="var(--accent)"></circle>
+            <circle cx="50" cy="50" r="23" fill="#152238"></circle>
+            <circle cx="50" cy="50" r="17" fill="var(--accent)"></circle>
+          </svg>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:#fff;">¡Bienvenido a Campus360!</div>
+          <button onClick="{{ goLogin }}" style="width:100%;max-width:230px;padding:16px;border-radius:999px;background:var(--accent);color:#152238;font-size:15.5px;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(244,201,63,0.3);font-family:inherit;">Ingresar</button>
+          <div style="width:100%;max-width:230px;">
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-bottom:8px;white-space:nowrap;">Te llevaremos al campus en unos segundos...</div>
+            <div style="height:4px;border-radius:999px;background:rgba(255,255,255,0.12);overflow:hidden;">
+              <div style="height:100%;width:45%;border-radius:999px;background:var(--accent);"></div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isLoginScreen }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:32px;box-sizing:border-box;">
+          <div style="margin-bottom:8px;">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;">Iniciar sesión</div>
+            <div style="font-size:12.5px;color:var(--text2);margin-top:4px;">Universidad Fidélitas · Costa Rica</div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px;">Correo institucional</div>
+            <input value="{{ loginEmail }}" onChange="{{ onChangeLoginEmail }}" placeholder="ejemplo@ufidelitas.ac.cr" style="width:100%;box-sizing:border-box;padding:13px 14px;border-radius:14px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px;font-family:inherit;"></input>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:600;color:var(--text2);">Contraseña</span>
+              <span style="font-size:11.5px;color:var(--accent);font-weight:600;">¿Olvidaste tu contraseña?</span>
+            </div>
+            <input value="{{ loginPassword }}" onChange="{{ onChangeLoginPassword }}" type="password" placeholder="••••••••" style="width:100%;box-sizing:border-box;padding:13px 14px;border-radius:14px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px;font-family:inherit;"></input>
+          </div>
+          <button onClick="{{ enterApp }}" style="width:100%;padding:15px;border-radius:999px;border:none;background:var(--accent);color:#152238;font-size:14.5px;font-weight:700;cursor:pointer;margin-top:6px;font-family:inherit;">Iniciar sesión →</button>
+          <div style="display:flex;align-items:center;gap:10px;margin:8px 0;">
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+            <span style="font-size:10px;font-weight:700;color:var(--text3);letter-spacing:0.06em;">O CONTINUAR CON</span>
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+          </div>
+          <button onClick="{{ enterApp }}" style="width:100%;padding:13px;border-radius:14px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;">
+            <svg width="15" height="15" viewBox="0 0 23 23"><rect x="1" y="1" width="10" height="10" fill="#F35325"></rect><rect x="12" y="1" width="10" height="10" fill="#81BC06"></rect><rect x="1" y="12" width="10" height="10" fill="#05A6F0"></rect><rect x="12" y="12" width="10" height="10" fill="#FFBA08"></rect></svg>
+            Microsoft (SSO)
+          </button>
+          <div style="text-align:center;font-size:11.5px;color:var(--text3);margin-top:10px;">¿Necesitás una cuenta demo? <span style="color:var(--accent);font-weight:600;">Ver credenciales de prueba</span></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;min-height:0;position:relative;">
+
+          <sc-if value="{{ tabInicio }}" hint-placeholder-val="{{ true }}">
+            <div class="page-scroll" style="height:100%;overflow-y:auto;padding:54px 16px 110px;box-sizing:border-box;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+                <div>
+                  <div style="font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:700;">¡Pura vida, Andrés!</div>
+                  <div style="font-size:12.5px;color:var(--text2);margin-top:4px;">Miércoles · 24°C en San Pedro</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <button onClick="{{ openNotif }}" style="position:relative;width:38px;height:38px;border-radius:50%;background:var(--surface);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3a6 6 0 00-6 6v3.5c0 .7-.25 1.38-.7 1.9L4 16h16l-1.3-1.6a2.7 2.7 0 01-.7-1.9V9a6 6 0 00-6-6z" stroke="var(--text2)" stroke-width="1.7" stroke-linejoin="round"></path><path d="M9.5 19a2.5 2.5 0 005 0" stroke="var(--text2)" stroke-width="1.7" stroke-linecap="round"></path></svg>
+                    <sc-if value="{{ hasUnreadNotif }}" hint-placeholder-val="{{ false }}">
+                      <div style="position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--surface);"></div>
+                    </sc-if>
+                  </button>
+                  <image-slot id="profile-avatar" shape="circle" placeholder="Foto" style="width:42px;height:42px;flex-shrink:0;"></image-slot>
+                </div>
+              </div>
+              <div style="background:rgba(244,201,63,0.12);border:1px solid rgba(244,201,63,0.25);border-radius:999px;padding:8px 16px 8px 8px;font-size:12.5px;color:var(--text2);margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+                <image-slot id="today-icon" shape="circle" placeholder="+" style="width:26px;height:26px;flex-shrink:0;"></image-slot>
+                <span style="font-weight:700;color:var(--accent);">Hoy</span>
+                <span style="width:3px;height:3px;border-radius:50%;background:var(--text3);flex-shrink:0;"></span>
+                <span>1 evento · 1 tutoría · 3 pendientes</span>
+              </div>
+
+              <div style="position:relative;margin-bottom:18px;">
+              <div ref="{{ storiesRef }}" class="no-scrollbar" style="display:flex;gap:14px;overflow-x:auto;padding:0 26px 6px;scrollbar-width:none;-ms-overflow-style:none;">
+                <button onClick="{{ openCapture }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;flex-shrink:0;width:62px;cursor:pointer;font-family:inherit;">
+                  <div style="position:relative;width:58px;height:58px;padding:2.5px;box-sizing:border-box;border-radius:50%;background:{{ storyRingBg }};">
+                    <image-slot id="profile-avatar" shape="circle" placeholder="Foto" style="width:100%;height:100%;"></image-slot>
+                    <div style="position:absolute;bottom:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:var(--accent);border:2.5px solid var(--bg);display:flex;align-items:center;justify-content:center;">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z" stroke="#152238" stroke-width="1.8" stroke-linejoin="round"></path><circle cx="12" cy="13.5" r="3.2" stroke="#152238" stroke-width="1.8"></circle></svg>
+                    </div>
+                  </div>
+                </button>
+                <sc-for list="{{ storyItems }}" as="s" hint-placeholder-count="5">
+                  <button onClick="{{ s.open }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;flex-shrink:0;width:62px;cursor:pointer;font-family:inherit;">
+                    <div style="width:58px;height:58px;border-radius:50%;padding:2.5px;background:linear-gradient(135deg,{{ s.color }},var(--accent));">
+                      <div style="width:100%;height:100%;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;">
+                        <image-slot id="story-{{ s.id }}" shape="circle" placeholder="{{ s.emoji }}" style="width:50px;height:50px;"></image-slot>
+                      </div>
+                    </div>
+                    <span style="font-size:10.5px;font-weight:600;color:var(--text2);text-align:center;line-height:1.2;">{{ s.label }}</span>
+                  </button>
+                </sc-for>
+              </div>
+              <button onClick="{{ scrollStoriesLeft }}" style="position:absolute;left:0px;top:29px;width:26px;height:26px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                <svg width="8" height="12" viewBox="0 0 8 12"><path d="M6.5 1L1.5 6l5 5" stroke="var(--text2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+              </button>
+              <button onClick="{{ scrollStoriesRight }}" style="position:absolute;right:0px;top:29px;width:26px;height:26px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                <svg width="8" height="12" viewBox="0 0 8 12"><path d="M1.5 1L6.5 6l-5 5" stroke="var(--text2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+              </button>
+              </div>
+
+              <div style="background:linear-gradient(135deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:22px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;">
+                <div style="font-size:13.5px;font-weight:700;">Check-in de campus</div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                  <button onClick="{{ doCheckin }}" style="padding:11px 16px;border-radius:999px;border:none;font-size:12.5px;font-weight:700;cursor:pointer;background:{{ checkinBg }};color:{{ checkinFg }};white-space:nowrap;font-family:inherit;">{{ checkinLabel }}</button>
+                  <span style="font-size:11px;color:var(--text2);">🔥 {{ checkinStreak }} días seguidos</span>
+                </div>
+              </div>
+
+              <sc-for list="{{ feedCards }}" as="card" hint-placeholder-count="6">
+                <div style="background:var(--surface);border-radius:24px;padding:16px;margin-bottom:14px;">
+                  <sc-if value="{{ card.isEvento }}" hint-placeholder-val="{{ false }}">
+                    <image-slot id="sheet-{{ card.id }}" shape="rounded" radius="18" placeholder="{{ card.photoCaption }}" style="width:100%;height:140px;margin-bottom:12px;"></image-slot>
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                      <span style="display:inline-flex;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;background:{{ card.tagBg }};color:{{ card.tagFg }};">{{ card.tag }}</span>
+                      <span style="font-size:11.5px;color:var(--text2);">{{ card.when }}</span>
+                    </div>
+                    <div style="font-size:15.5px;font-weight:700;margin-bottom:10px;line-height:1.3;">{{ card.title }}</div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                      <div style="display:flex;align-items:center;">
+                        <sc-for list="{{ card.avatars }}" as="av" hint-placeholder-count="3">
+                          <div style="width:25px;height:25px;border-radius:50%;background:{{ av.bg }};border:2px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;color:#152238;margin-left:-8px;">{{ av.ini }}</div>
+                        </sc-for>
+                        <span style="font-size:11.5px;color:var(--text2);margin-left:10px;">+{{ card.attendeeCount }} van</span>
+                      </div>
+                      <button onClick="{{ card.open }}" style="padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:none;color:var(--text);font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;">Ver evento</button>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ card.isLogro }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                      <div style="width:40px;height:40px;border-radius:50%;background:{{ card.avatarBg }};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#152238;flex-shrink:0;">{{ card.avatarIni }}</div>
+                      <div style="flex:1;">
+                        <div style="font-size:13.5px;font-weight:600;line-height:1.4;">{{ card.title }}</div>
+                        <div style="font-size:11.5px;color:var(--text2);margin-top:2px;">+{{ card.points }} pts ganados</div>
+                      </div>
+                      <div style="font-size:20px;">🎉</div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ card.isRecordatorio }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                      <div style="width:40px;height:40px;border-radius:14px;background:var(--surface2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <svg width="19" height="19" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="var(--accent)" stroke-width="1.8" fill="none"></circle><path d="M12 7v5l3.5 2" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg>
+                      </div>
+                      <div style="flex:1;">
+                        <div style="font-size:13.5px;font-weight:600;line-height:1.4;">{{ card.title }}</div>
+                      </div>
+                      <button onClick="{{ card.open }}" style="font-size:11.5px;font-weight:700;color:var(--accent);background:none;border:none;cursor:pointer;font-family:inherit;">Ver</button>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ card.isNoticia }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                      <div style="width:40px;height:40px;border-radius:14px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;">📰</div>
+                      <div style="flex:1;">
+                        <div style="font-size:10.5px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.04em;">Institucional</div>
+                        <div style="font-size:13.5px;font-weight:600;margin-top:2px;line-height:1.4;">{{ card.title }}</div>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ tabDescubrir }}" hint-placeholder-val="{{ false }}">
+            <div class="page-scroll" style="height:100%;overflow-y:auto;padding:54px 16px 110px;box-sizing:border-box;">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:700;margin-bottom:4px;">Descubrir</div>
+              <div style="font-size:12.5px;color:var(--text2);margin-bottom:16px;">Recomendado para Administración de Negocios</div>
+              <div style="position:relative;margin-bottom:16px;">
+              <div ref="{{ filtersRef }}" class="no-scrollbar" style="display:flex;gap:8px;overflow-x:auto;padding:0 26px 8px;scrollbar-width:none;-ms-overflow-style:none;">
+                <sc-for list="{{ discoverFilters }}" as="f" hint-placeholder-count="5">
+                  <button onClick="{{ f.setActive }}" style="flex-shrink:0;padding:9px 16px;border-radius:999px;border:1px solid var(--border);font-size:12.5px;font-weight:600;cursor:pointer;background:{{ f.bg }};color:{{ f.fg }};font-family:inherit;">{{ f.label }}</button>
+                </sc-for>
+              </div>
+              <button onClick="{{ scrollFiltersLeft }}" style="position:absolute;left:0px;top:5px;width:24px;height:24px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                <svg width="7" height="11" viewBox="0 0 8 12"><path d="M6.5 1L1.5 6l5 5" stroke="var(--text2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+              </button>
+              <button onClick="{{ scrollFiltersRight }}" style="position:absolute;right:0px;top:5px;width:24px;height:24px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                <svg width="7" height="11" viewBox="0 0 8 12"><path d="M1.5 1L6.5 6l-5 5" stroke="var(--text2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+              </button>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <sc-for list="{{ discoverItems }}" as="d" hint-placeholder-count="6">
+                  <button onClick="{{ d.open }}" style="text-align:left;background:var(--surface);border-radius:20px;padding:12px;border:none;cursor:pointer;display:flex;flex-direction:column;gap:8px;font-family:inherit;">
+                    <image-slot id="sheet-{{ d.id }}" shape="rounded" radius="14" placeholder="{{ d.photoCaption }}" style="width:100%;height:92px;"></image-slot>
+                    <span style="display:inline-flex;align-self:flex-start;padding:3px 8px;border-radius:999px;font-size:9.5px;font-weight:700;background:{{ d.tagBg }};color:{{ d.tagFg }};">{{ d.tag }}</span>
+                    <div style="font-size:12.5px;font-weight:700;line-height:1.3;color:var(--accent);">{{ d.title }}</div>
+                    <div style="font-size:10.5px;color:var(--text2);">{{ d.meta }}</div>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ tabAsistente }}" hint-placeholder-val="{{ false }}">
+            <div style="height:100%;display:flex;flex-direction:column;padding-top:54px;box-sizing:border-box;">
+              <div style="display:flex;align-items:center;gap:10px;padding:0 16px 14px;border-bottom:1px solid var(--border);flex-shrink:0;">
+                <div style="width:36px;height:36px;border-radius:50%;overflow:hidden;background:var(--accent);flex-shrink:0;">
+                  <image-slot id="rasta-tab-icon" shape="circle" style="width:100%;height:100%;"></image-slot>
+                </div>
+                <div>
+                  <div style="font-size:14.5px;font-weight:700;">Rasta</div>
+                  <div style="font-size:10.5px;color:#3DDBB0;">● en línea</div>
+                </div>
+              </div>
+              <div class="chat-scroll" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
+                <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="2">
+                  <sc-if value="{{ m.fromUser }}" hint-placeholder-val="{{ false }}">
+                    <div style="align-self:flex-end;max-width:78%;background:var(--accent);color:#152238;padding:10px 14px;border-radius:18px 18px 4px 18px;font-size:13.5px;line-height:1.4;">{{ m.text }}</div>
+                  </sc-if>
+                  <sc-if value="{{ m.fromAi }}" hint-placeholder-val="{{ true }}">
+                    <div style="align-self:flex-start;max-width:82%;background:var(--surface);padding:10px 14px;border-radius:18px 18px 18px 4px;font-size:13.5px;line-height:1.4;">{{ m.text }}</div>
+                  </sc-if>
+                </sc-for>
+              </div>
+              <div style="position:relative;flex-shrink:0;padding:0 16px 12px;">
+              <div ref="{{ chipsRef }}" class="no-scrollbar" style="display:flex;gap:8px;overflow-x:auto;padding:0 26px;scrollbar-width:none;-ms-overflow-style:none;">
+                <sc-for list="{{ chatSuggestions }}" as="c" hint-placeholder-count="4">
+                  <button onClick="{{ c.send }}" style="flex-shrink:0;padding:9px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;">{{ c.label }}</button>
+                </sc-for>
+              </div>
+              <button onClick="{{ scrollChipsLeft }}" style="position:absolute;left:16px;top:-2px;width:24px;height:24px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                <svg width="7" height="11" viewBox="0 0 8 12"><path d="M6.5 1L1.5 6l5 5" stroke="var(--text2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+              </button>
+              <button onClick="{{ scrollChipsRight }}" style="position:absolute;right:16px;top:-2px;width:24px;height:24px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                <svg width="7" height="11" viewBox="0 0 8 12"><path d="M1.5 1L6.5 6l-5 5" stroke="var(--text2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+              </button>
+              </div>
+              <div style="display:flex;gap:8px;padding:10px 16px 18px;border-top:1px solid var(--border);flex-shrink:0;">
+                <input value="{{ chatDraft }}" onChange="{{ onChangeChatDraft }}" placeholder="Escribile a Rasta..." style="flex:1;padding:12px 16px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13.5px;outline:none;font-family:inherit;min-width:0;"></input>
+                <button onClick="{{ sendChatFree }}" style="width:42px;height:42px;border-radius:50%;background:var(--accent);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+                  <svg width="17" height="17" viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-8-8-2z" fill="#152238"></path></svg>
+                </button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ tabCamino }}" hint-placeholder-val="{{ false }}">
+            <div class="page-scroll" style="height:100%;overflow-y:auto;padding:54px 16px 110px;box-sizing:border-box;">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:700;margin-bottom:4px;">Mi Camino</div>
+              <div style="font-size:12.5px;color:var(--text2);margin-bottom:18px;">II Cuatrimestre 2026 · Semana 9 de 15</div>
+
+              <div style="background:var(--surface);border-radius:24px;padding:18px;margin-bottom:18px;">
+                <div style="display:flex;align-items:center;gap:18px;">
+                  <div style="position:relative;width:104px;height:104px;flex-shrink:0;">
+                    <svg width="104" height="104" viewBox="0 0 110 110" style="transform:rotate(-90deg);">
+                      <circle cx="55" cy="55" r="48" stroke="var(--surface2)" stroke-width="10" fill="none"></circle>
+                      <circle cx="55" cy="55" r="48" stroke="var(--accent)" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="{{ tcuRingOffset }}"></circle>
+                    </svg>
+                    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                      <div style="font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:700;">{{ tcuHoras }}</div>
+                      <div style="font-size:9.5px;color:var(--text2);">de {{ tcuRequeridas }}h</div>
+                    </div>
+                  </div>
+                  <div style="flex:1;">
+                    <div style="font-size:13px;font-weight:700;">TCU — Trabajo Comunal</div>
+                    <div style="font-size:11.5px;color:var(--text2);margin-top:4px;">Etapa actual: {{ tcuEtapaActual }}</div>
+                    <div style="font-size:11.5px;color:var(--text2);margin-top:2px;">Período 2-2026</div>
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:20px;position:relative;">
+                  <div style="position:absolute;top:13px;left:8%;right:8%;height:2px;background:var(--surface2);z-index:0;"></div>
+                  <sc-for list="{{ etapas }}" as="e" hint-placeholder-count="5">
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;position:relative;z-index:1;">
+                      <div style="width:25px;height:25px;border-radius:50%;background:{{ e.dotBg }};display:flex;align-items:center;justify-content:center;font-size:11px;color:{{ e.dotFg }};font-weight:700;">{{ e.dotContent }}</div>
+                      <span style="font-size:9px;color:var(--text2);text-align:center;line-height:1.15;">{{ e.nombre }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="background:var(--surface);border-radius:24px;padding:18px;margin-bottom:18px;">
+                <div style="font-size:13.5px;font-weight:700;margin-bottom:12px;">Bitácora rápida</div>
+                <div style="display:flex;gap:8px;margin-bottom:10px;">
+                  <input value="{{ bitFecha }}" onChange="{{ onChangeBitFecha }}" placeholder="Fecha" style="flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12.5px;font-family:inherit;"></input>
+                  <input value="{{ bitHorasInput }}" onChange="{{ onChangeBitHoras }}" placeholder="Horas" style="width:64px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12.5px;font-family:inherit;"></input>
+                </div>
+                <input value="{{ bitDesc }}" onChange="{{ onChangeBitDesc }}" placeholder="Descripción de la actividad" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12.5px;margin-bottom:12px;font-family:inherit;"></input>
+                <button onClick="{{ addBitacora }}" style="width:100%;padding:12px;border-radius:999px;border:none;background:var(--accent);color:#152238;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;">Registrar horas</button>
+                <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;">
+                  <sc-for list="{{ bitacoraList }}" as="b" hint-placeholder-count="3">
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border);">
+                      <div>
+                        <div style="font-size:12.5px;font-weight:600;">{{ b.desc }}</div>
+                        <div style="font-size:10.5px;color:var(--text2);margin-top:2px;">{{ b.fecha }} · {{ b.horas }}h</div>
+                      </div>
+                      <span style="font-size:10.5px;font-weight:700;color:{{ b.estadoColor }};">{{ b.estado }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="font-size:13.5px;font-weight:700;margin-bottom:10px;">Tutorías</div>
+              <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;">
+                <sc-for list="{{ tutoriaFilters }}" as="tf" hint-placeholder-count="4">
+                  <button onClick="{{ tf.setActive }}" style="flex-shrink:0;padding:8px 14px;border-radius:999px;border:1px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;background:{{ tf.bg }};color:{{ tf.fg }};font-family:inherit;">{{ tf.label }}</button>
+                </sc-for>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+                <sc-for list="{{ tutorias }}" as="t" hint-placeholder-count="3">
+                  <div style="background:var(--surface);border-radius:18px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+                    <div style="flex:1;">
+                      <div style="font-size:13px;font-weight:700;">{{ t.materia }}</div>
+                      <div style="font-size:11px;color:var(--text2);margin-top:2px;">{{ t.profesor }} · {{ t.modalidad }}</div>
+                      <div style="font-size:11px;color:var(--text2);margin-top:1px;">⭐ {{ t.rating }} · {{ t.when }}</div>
+                    </div>
+                    <button onClick="{{ t.toggle }}" style="padding:9px 14px;border-radius:999px;border:none;font-size:11.5px;font-weight:700;cursor:pointer;background:{{ t.btnBg }};color:{{ t.btnFg }};white-space:nowrap;font-family:inherit;">{{ t.btnLabel }}</button>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="font-size:13.5px;font-weight:700;margin-bottom:10px;">Agenda de la semana</div>
+              <div style="display:flex;gap:6px;margin-bottom:14px;">
+                <sc-for list="{{ weekDays }}" as="wd" hint-placeholder-count="7">
+                  <div style="flex:1;text-align:center;padding:10px 0;border-radius:14px;background:{{ wd.bg }};color:{{ wd.fg }};font-size:11px;font-weight:700;">{{ wd.label }}</div>
+                </sc-for>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+                <sc-for list="{{ agendaItems }}" as="ag" hint-placeholder-count="4">
+                  <div style="display:flex;gap:12px;align-items:center;background:var(--surface);border-radius:16px;padding:12px 14px;">
+                    <div style="font-size:10.5px;font-weight:700;color:var(--text2);width:48px;flex-shrink:0;">{{ ag.day }}</div>
+                    <div style="flex:1;">
+                      <div style="font-size:12.5px;font-weight:600;">{{ ag.title }}</div>
+                      <div style="font-size:10.5px;color:var(--text2);margin-top:1px;">{{ ag.time }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="background:var(--surface);border-radius:24px;padding:18px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                  <div style="font-size:13.5px;font-weight:700;">Objetivos de la semana</div>
+                  <div style="display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:700;color:var(--accent);">🔥 {{ rachaSemanas }} sem.</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <sc-for list="{{ objetivos }}" as="ob" hint-placeholder-count="4">
+                    <button onClick="{{ ob.toggle }}" style="display:flex;align-items:center;gap:10px;background:none;border:none;padding:0;text-align:left;cursor:pointer;width:100%;font-family:inherit;">
+                      <div style="width:21px;height:21px;border-radius:7px;border:2px solid {{ ob.boxBorder }};background:{{ ob.boxBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#152238;font-size:11px;font-weight:700;">{{ ob.checkMark }}</div>
+                      <span style="font-size:12.5px;color:{{ ob.textColor }};text-decoration:{{ ob.textDecoration }};">{{ ob.texto }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ tabPerfil }}" hint-placeholder-val="{{ false }}">
+            <div class="page-scroll" style="height:100%;overflow-y:auto;padding:54px 16px 110px;box-sizing:border-box;">
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:20px;">
+                <image-slot id="profile-avatar" shape="circle" placeholder="Foto de perfil" style="width:82px;height:82px;margin-bottom:10px;"></image-slot>
+                <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;">Andrés Rojas</div>
+                <div style="font-size:12.5px;color:var(--text2);margin-top:3px;">Administración de Negocios</div>
+              </div>
+
+              <div style="background:var(--surface);border-radius:20px;padding:16px;margin-bottom:20px;">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">
+                  <span style="font-size:13.5px;font-weight:700;">Nivel {{ nivelActual }}</span>
+                  <span style="font-size:11.5px;color:var(--text2);">{{ pointsLabel }} pts</span>
+                </div>
+                <div style="height:10px;border-radius:999px;background:var(--surface2);overflow:hidden;">
+                  <div style="height:100%;border-radius:999px;background:var(--accent);width:{{ nivelProgressPct }}%;"></div>
+                </div>
+                <div style="font-size:11px;color:var(--text2);margin-top:6px;margin-bottom:16px;">{{ nivelRestante }}</div>
+
+                <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
+
+                <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;">Insignias</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                  <sc-for list="{{ insignias }}" as="ins" hint-placeholder-count="5">
+                    <div style="display:inline-flex;align-items:center;gap:7px;padding:7px 12px 7px 8px;border-radius:999px;background:{{ ins.chipBg }};">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+                        <sc-if value="{{ ins.isTutoria }}" hint-placeholder-val="{{ false }}">
+                          <path d="M2 8l10-4 10 4-10 4-10-4z" fill="{{ ins.dotBg }}" stroke="{{ ins.dotBorder }}" stroke-width="1.3" stroke-linejoin="round"></path>
+                          <path d="M6 10.5V15c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5" stroke="{{ ins.detailStroke }}" stroke-width="1.3" fill="none" stroke-linecap="round"></path>
+                        </sc-if>
+                        <sc-if value="{{ ins.isTcu }}" hint-placeholder-val="{{ false }}">
+                          <circle cx="12" cy="8" r="5" fill="{{ ins.dotBg }}" stroke="{{ ins.dotBorder }}" stroke-width="1.3"></circle>
+                          <path d="M9 12.5L7 21l5-2.5 5 2.5-2-8.5" stroke="{{ ins.detailStroke }}" stroke-width="1.3" fill="none" stroke-linejoin="round"></path>
+                        </sc-if>
+                        <sc-if value="{{ ins.isAsistente }}" hint-placeholder-val="{{ false }}">
+                          <rect x="3" y="5" width="18" height="16" rx="3" fill="{{ ins.dotBg }}" stroke="{{ ins.dotBorder }}" stroke-width="1.3"></rect>
+                          <path d="M3 10h18M8 3v4M16 3v4" stroke="{{ ins.detailStroke }}" stroke-width="1.3" stroke-linecap="round"></path>
+                          <path d="M8.5 14.5l2.3 2.3 4.7-4.8" stroke="{{ ins.detailStroke }}" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </sc-if>
+                        <sc-if value="{{ ins.isRacha }}" hint-placeholder-val="{{ false }}">
+                          <path d="M12 2c1 3-3 4-3 7.5a3 3 0 006 0c0-1.2-.6-2-1-2.7.9.4 2 1.8 2 4a5 5 0 01-10 0C6 6.5 10 6 12 2z" fill="{{ ins.dotBg }}" stroke="{{ ins.dotBorder }}" stroke-width="1.2" stroke-linejoin="round"></path>
+                        </sc-if>
+                        <sc-if value="{{ ins.isVoluntario }}" hint-placeholder-val="{{ false }}">
+                          <path d="M12 20s-8-4.5-8-10.5A4.5 4.5 0 0112 6.2 4.5 4.5 0 0120 9.5C20 15.5 12 20 12 20z" fill="{{ ins.dotBg }}" stroke="{{ ins.dotBorder }}" stroke-width="1.3" stroke-linejoin="round"></path>
+                        </sc-if>
+                      </svg>
+                      <span style="font-size:11px;font-weight:600;color:{{ ins.textColor }};">{{ ins.nombre }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ showBadgesToggle }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ toggleBadges }}" style="margin-top:10px;background:none;border:none;padding:0;font-size:11.5px;font-weight:700;color:var(--accent);cursor:pointer;font-family:inherit;">{{ badgesToggleLabel }}</button>
+                </sc-if>
+              </div>
+
+              <div style="background:var(--surface);border-radius:20px;padding:16px;margin-bottom:20px;">
+                <div style="font-size:13.5px;font-weight:700;margin-bottom:12px;">Amigos</div>
+                <div style="display:flex;gap:8px;margin-bottom:8px;">
+                  <input value="{{ friendEmail }}" onChange="{{ onChangeFriendEmail }}" placeholder="correo@ufidelitas.ac.cr" style="flex:1;min-width:0;padding:11px 12px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12.5px;font-family:inherit;"></input>
+                  <button onClick="{{ sendFriendRequest }}" style="flex-shrink:0;padding:0 16px;border-radius:12px;border:none;background:var(--accent);color:#152238;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;">Enviar</button>
+                </div>
+                <sc-if value="{{ friendMessage }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:11.5px;color:var(--accent);margin-bottom:12px;">{{ friendMessage }}</div>
+                </sc-if>
+
+                <sc-if value="{{ hasReceivedRequests }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;">Solicitudes recibidas</div>
+                  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+                    <sc-for list="{{ receivedRequests }}" as="r" hint-placeholder-count="2">
+                      <div style="display:flex;align-items:center;gap:10px;">
+                        <div style="width:34px;height:34px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text);flex-shrink:0;">{{ r.ini }}</div>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-size:12.5px;font-weight:600;">{{ r.name }}</div>
+                          <div style="font-size:10.5px;color:var(--text2);">{{ r.carrera }}</div>
+                        </div>
+                        <button onClick="{{ r.accept }}" style="width:30px;height:30px;border-radius:50%;background:var(--accent);border:none;color:#152238;font-size:13px;cursor:pointer;flex-shrink:0;">✓</button>
+                        <button onClick="{{ r.reject }}" style="width:30px;height:30px;border-radius:50%;background:var(--surface2);border:none;color:var(--text2);font-size:12px;cursor:pointer;flex-shrink:0;">✕</button>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;">Mis amigos</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <sc-for list="{{ friends }}" as="fr" hint-placeholder-count="2">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                      <div style="width:34px;height:34px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text);flex-shrink:0;">{{ fr.ini }}</div>
+                      <div style="flex:1;min-width:0;">
+                        <div style="font-size:12.5px;font-weight:600;">{{ fr.name }}</div>
+                        <div style="font-size:10.5px;color:var(--text2);">{{ fr.carrera }}</div>
+                      </div>
+                      <button style="flex-shrink:0;padding:7px 12px;border-radius:999px;border:none;background:var(--accent);color:#152238;font-size:9.5px;font-weight:700;cursor:pointer;font-family:inherit;">Enviar Mensaje</button>
+                    </div>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ hasSentRequests }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.04em;margin:14px 0 8px;">Solicitudes enviadas</div>
+                  <div style="display:flex;flex-direction:column;gap:8px;">
+                    <sc-for list="{{ sentRequests }}" as="sr" hint-placeholder-count="1">
+                      <div style="display:flex;align-items:center;gap:10px;">
+                        <div style="width:34px;height:34px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text);flex-shrink:0;">{{ sr.ini }}</div>
+                        <div style="flex:1;">
+                          <div style="font-size:12.5px;font-weight:600;">{{ sr.name }}</div>
+                        </div>
+                        <span style="font-size:10.5px;color:var(--text3);">Pendiente</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+
+              <button onClick="{{ openWrapped }}" style="width:100%;background:linear-gradient(135deg,#152238,#3d3620);border-radius:24px;padding:20px;border:none;cursor:pointer;text-align:left;margin-bottom:20px;box-sizing:border-box;font-family:inherit;">
+                <div style="font-size:10.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">Campus Wrapped</div>
+                <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-top:6px;">Tu II Cuatrimestre 2026 🎉</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-top:6px;">Mirá tu resumen del cuatri y compartilo</div>
+              </button>
+
+              <div style="font-size:13.5px;font-weight:700;margin-bottom:10px;">Eventos asistidos</div>
+              <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+                <sc-for list="{{ historialEventos }}" as="h" hint-placeholder-count="3">
+                  <div style="display:flex;justify-content:space-between;background:var(--surface);border-radius:16px;padding:12px 14px;">
+                    <span style="font-size:12.5px;font-weight:600;">{{ h.title }}</span>
+                    <span style="font-size:11px;color:var(--text2);">{{ h.when }}</span>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;background:var(--surface);border-radius:18px;padding:14px 16px;">
+                <span style="font-size:13px;font-weight:600;">Modo claro</span>
+                <div style="display:flex;background:var(--surface2);border-radius:999px;padding:3px;">
+                  <button onClick="{{ setLight }}" style="width:32px;height:26px;border-radius:999px;border:none;cursor:pointer;background:{{ lightBtnBg }};display:flex;align-items:center;justify-content:center;font-size:12px;">☀️</button>
+                  <button onClick="{{ setDark }}" style="width:32px;height:26px;border-radius:999px;border:none;cursor:pointer;background:{{ darkBtnBg }};display:flex;align-items:center;justify-content:center;font-size:12px;">🌙</button>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+        </div>
+
+        <div style="flex-shrink:0;display:flex;align-items:center;justify-content:space-around;padding:6px 6px 26px;background:var(--surface);border-top:1px solid var(--border);position:relative;z-index:30;">
+          <button onClick="{{ goInicio }}" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;padding:6px 8px;cursor:pointer;font-family:inherit;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 11L12 4l8 7v8a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1v-8z" stroke="{{ inicioColor }}" stroke-width="1.8" stroke-linejoin="round"></path></svg>
+            <span style="font-size:10px;font-weight:600;color:{{ inicioColor }};">Inicio</span>
+          </button>
+          <button onClick="{{ goDescubrir }}" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;padding:6px 8px;cursor:pointer;font-family:inherit;">
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="2" stroke="{{ descubrirColor }}" stroke-width="1.8"></rect><rect x="13" y="1" width="8" height="8" rx="2" stroke="{{ descubrirColor }}" stroke-width="1.8"></rect><rect x="1" y="13" width="8" height="8" rx="2" stroke="{{ descubrirColor }}" stroke-width="1.8"></rect><rect x="13" y="13" width="8" height="8" rx="2" stroke="{{ descubrirColor }}" stroke-width="1.8"></rect></svg>
+            <span style="font-size:10px;font-weight:600;color:{{ descubrirColor }};">Descubrir</span>
+          </button>
+          <button onClick="{{ goAsistente }}" style="display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;">
+            <div style="width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;overflow:hidden;border:4px solid var(--surface);margin-top:-28px;box-shadow:0 6px 16px rgba(244,201,63,0.28);animation:pulseGlow 2.4s ease-in-out infinite;">
+              <image-slot id="rasta-tab-icon" shape="circle" src="assets/rasta-mascot.png" fit="contain" placeholder="Poné a Rasta aquí" style="width:100%;height:100%;"></image-slot>
+            </div>
+            <span style="font-size:10px;font-weight:700;color:var(--accent);">Rasta</span>
+          </button>
+          <button onClick="{{ goCamino }}" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;padding:6px 8px;cursor:pointer;font-family:inherit;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="{{ caminoColor }}" stroke-width="1.8" fill="none"></circle><circle cx="12" cy="12" r="3" fill="{{ caminoColor }}"></circle></svg>
+            <span style="font-size:10px;font-weight:600;color:{{ caminoColor }};">Mi Camino</span>
+          </button>
+          <button onClick="{{ goPerfil }}" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;padding:6px 8px;cursor:pointer;font-family:inherit;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="{{ perfilColor }}" stroke-width="1.8"></circle><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6" stroke="{{ perfilColor }}" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg>
+            <span style="font-size:10px;font-weight:600;color:{{ perfilColor }};">Perfil</span>
+          </button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;z-index:100;">
+          <div onClick="{{ closeSheet }}" style="position:absolute;inset:0;background:rgba(0,0,0,0.5);animation:fadeIn 0.2s ease;"></div>
+          <div class="page-scroll" style="position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:28px 28px 0 0;padding:20px 20px 30px;max-height:82%;overflow-y:auto;animation:slideUp 0.28s cubic-bezier(.32,.72,0,1);box-sizing:border-box;">
+            <div style="width:36px;height:4px;background:var(--border);border-radius:999px;margin:0 auto 16px;"></div>
+            <button onClick="{{ closeSheet }}" style="position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:50%;background:var(--surface2);border:none;color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;">✕</button>
+            <image-slot id="sheet-{{ sheetItem.id }}" shape="rounded" radius="18" placeholder="{{ sheetItem.photoCaption }}" style="width:100%;height:150px;margin-bottom:14px;"></image-slot>
+            <span style="display:inline-flex;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;background:{{ sheetItem.tagBg }};color:{{ sheetItem.tagFg }};margin-bottom:10px;">{{ sheetItem.tag }}</span>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;margin-bottom:8px;line-height:1.3;">{{ sheetItem.title }}</div>
+            <sc-if value="{{ sheetItem.isTutoria }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:8px;">{{ sheetItem.profesor }}</div>
+              <div style="font-size:12.5px;color:var(--text2);margin-bottom:2px;">🗓️ {{ sheetItem.when }}</div>
+              <div style="font-size:12.5px;color:var(--text2);margin-bottom:14px;">💰 {{ sheetItem.costo }}</div>
+            </sc-if>
+            <sc-if value="{{ sheetItem.isNotTutoria }}" hint-placeholder-val="{{ true }}">
+              <div style="font-size:12.5px;color:var(--text2);margin-bottom:2px;">🗓️ {{ sheetItem.when }}</div>
+              <div style="font-size:12.5px;color:var(--text2);margin-bottom:14px;">📍 {{ sheetItem.place }}</div>
+            </sc-if>
+            <div style="font-size:13.5px;line-height:1.55;color:var(--text2);margin-bottom:18px;">{{ sheetItem.summary }}</div>
+            <sc-if value="{{ sheetItem.showAttendees }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;align-items:center;margin-bottom:20px;">
+                <sc-for list="{{ sheetItem.attendees }}" as="av" hint-placeholder-count="4">
+                  <div style="width:29px;height:29px;border-radius:50%;background:{{ av.bg }};border:2px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;color:#152238;margin-left:-8px;">{{ av.ini }}</div>
+                </sc-for>
+                <span style="font-size:12px;color:var(--text2);margin-left:10px;">+{{ sheetItem.attendeeCount }} confirmados</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{ sheetItem.hasEventStories }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-bottom:18px;">
+                <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;">Historias de hoy</div>
+                <div style="display:flex;gap:10px;">
+                  <sc-for list="{{ sheetItem.eventStoryAvatars }}" as="sv" hint-placeholder-count="2">
+                    <div style="width:38px;height:38px;border-radius:50%;padding:2px;background:linear-gradient(135deg,{{ sv.bg }},var(--accent));flex-shrink:0;">
+                      <div style="width:100%;height:100%;border-radius:50%;background:var(--surface);padding:2px;box-sizing:border-box;">
+                        <image-slot id="storypic-{{ sheetItem.id }}-{{ sv.ini }}" shape="circle" placeholder="{{ sv.ini }}" style="width:100%;height:100%;"></image-slot>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <button onClick="{{ sheetItem.ctaOnClick }}" style="width:100%;padding:15px;border-radius:999px;border:none;font-size:14.5px;font-weight:700;cursor:pointer;background:{{ sheetItem.ctaBg }};color:{{ sheetItem.ctaFg }};font-family:inherit;">{{ sheetItem.ctaLabel }}</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCapture }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;z-index:120;background:#000;">
+          <image-slot id="story-capture" shape="rect" placeholder="Tomá o soltá una foto" style="width:100%;height:100%;"></image-slot>
+
+          <div style="position:absolute;top:54px;left:16px;right:16px;display:flex;align-items:center;justify-content:space-between;pointer-events:none;">
+            <button onClick="{{ closeStoryFlow }}" style="width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.4);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto;">
+              <svg width="14" height="14" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg>
+            </button>
+            <svg width="20" height="20" viewBox="0 0 24 24" style="opacity:0.85;"><path d="M3 3l18 18M17 8.5A7 7 0 006 17M7.5 6A7 7 0 0121 12" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg>
+            <button style="width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.4);border:none;display:flex;align-items:center;justify-content:center;pointer-events:auto;">
+              <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" stroke="#fff" stroke-width="1.7" fill="none"></circle><path d="M4 8.5l1.5-2.5h13l1.5 2.5" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M4 8.5h16v10.5a1 1 0 01-1 1H5a1 1 0 01-1-1V8.5z" stroke="#fff" stroke-width="1.7" fill="none"></path></svg>
+            </button>
+          </div>
+
+          <div style="position:absolute;top:130px;left:16px;display:flex;flex-direction:column;gap:22px;opacity:0.9;">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#fff;">Aa</span>
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M2 12c3-4 8-4 10 0s7 4 10 0" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"></path></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#fff" stroke-width="1.7" fill="none"></rect><path d="M12 3v18" stroke="#fff" stroke-width="1.7"></path></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.7" fill="none"></circle><rect x="9" y="9" width="6" height="6" rx="1" fill="#fff"></rect></svg>
+          </div>
+
+          <div style="position:absolute;left:0;right:0;bottom:38px;display:flex;align-items:center;justify-content:center;gap:20px;">
+            <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FF6B5B,#C88FFF);opacity:0.85;"></div>
+            <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#8FA8FF,#3DDBB0);opacity:0.85;"></div>
+            <button onClick="{{ goToPreview }}" style="width:68px;height:68px;border-radius:50%;background:none;border:4px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+              <div style="width:54px;height:54px;border-radius:50%;background:var(--accent);"></div>
+            </button>
+            <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#F4C93F,#FF6B5B);opacity:0.85;"></div>
+            <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#3DDBB0,#8FA8FF);opacity:0.85;"></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;z-index:120;background:#000;">
+          <image-slot id="story-capture" shape="rect" style="width:100%;height:100%;"></image-slot>
+
+          <button onClick="{{ closeStoryFlow }}" style="position:absolute;top:54px;left:16px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.5);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+            <svg width="14" height="14" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg>
+          </button>
+
+          <div style="position:absolute;top:54px;right:16px;display:flex;flex-direction:column;align-items:flex-end;gap:20px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:12.5px;font-weight:600;color:#fff;">Texto</span>
+              <div style="width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#fff;">Aa</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:12.5px;font-weight:600;color:#fff;">Stickers</span>
+              <div style="width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;">
+                <svg width="17" height="17" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" stroke="#fff" stroke-width="1.6" fill="none"></rect><circle cx="9" cy="9" r="1.4" fill="#fff"></circle><path d="M6 16l4-4 3 3 3-4 2 5" stroke="#fff" stroke-width="1.4" fill="none" stroke-linejoin="round"></path></svg>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:12.5px;font-weight:600;color:#fff;">Audio</span>
+              <div style="width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;">
+                <svg width="15" height="15" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13" stroke="#fff" stroke-width="1.6" fill="none" stroke-linejoin="round"></path><circle cx="6" cy="18" r="3" stroke="#fff" stroke-width="1.6" fill="none"></circle><circle cx="17" cy="16" r="3" stroke="#fff" stroke-width="1.6" fill="none"></circle></svg>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:12.5px;font-weight:600;color:#fff;">Restyle</span>
+              <div style="width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z" stroke="#fff" stroke-width="1.6" fill="none" stroke-linejoin="round"></path></svg>
+              </div>
+            </div>
+            <div style="width:34px;height:22px;border-radius:999px;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;">
+              <svg width="11" height="7" viewBox="0 0 12 8"><path d="M1 1.5L6 6.5L11 1.5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </div>
+          </div>
+
+          <div style="position:absolute;left:20px;bottom:96px;font-size:14px;color:rgba(255,255,255,0.75);">Agregá un texto...</div>
+
+          <div style="position:absolute;left:16px;right:16px;bottom:24px;display:flex;align-items:center;gap:8px;">
+            <div style="flex-shrink:0;width:34px;height:34px;border-radius:50%;overflow:hidden;">
+              <image-slot id="profile-avatar" shape="circle" style="width:100%;height:100%;"></image-slot>
+            </div>
+            <div style="background:rgba(0,0,0,0.55);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;">Subir Historia</div>
+            <button onClick="{{ goToTagStep }}" style="flex:1;background:rgba(0,0,0,0.55);border:none;border-radius:999px;padding:10px 14px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;">Escoger Actividad</button>
+            <button onClick="{{ goToTagStep }}" style="flex-shrink:0;width:38px;height:38px;border-radius:50%;background:var(--accent);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+              <svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="#152238" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+            </button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isTagStep }}" hint-placeholder-val="{{ false }}">
+        <div class="page-scroll" style="position:absolute;inset:0;z-index:120;background:var(--bg);overflow-y:auto;box-sizing:border-box;padding:54px 20px 30px;">
+          <button onClick="{{ closeStoryFlow }}" style="position:absolute;top:54px;right:16px;width:30px;height:30px;border-radius:50%;background:var(--surface2);border:none;color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;">✕</button>
+          <image-slot id="story-capture" shape="rounded" radius="18" style="width:100%;height:180px;margin-bottom:18px;"></image-slot>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;">¿Qué estás viviendo?</div>
+          <div style="font-size:12.5px;color:var(--text2);margin-bottom:16px;">Etiquetá tu historia con lo que pasa hoy en campus</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ tagOptions }}" as="tg" hint-placeholder-count="5">
+              <button onClick="{{ tg.tagIt }}" style="display:flex;align-items:center;gap:12px;background:var(--surface);border:none;border-radius:16px;padding:12px 14px;cursor:pointer;text-align:left;font-family:inherit;">
+                <div style="width:34px;height:34px;border-radius:50%;overflow:hidden;flex-shrink:0;background:{{ tg.color }};">
+                  <image-slot id="sheet-{{ tg.id }}" shape="circle" style="width:100%;height:100%;"></image-slot>
+                </div>
+                <span style="font-size:13.5px;font-weight:600;color:var(--text);">{{ tg.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ notifOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;z-index:105;">
+          <div onClick="{{ closeNotif }}" style="position:absolute;inset:0;background:rgba(0,0,0,0.5);animation:fadeIn 0.2s ease;"></div>
+          <div class="page-scroll" style="position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:28px 28px 0 0;padding:20px 20px 30px;max-height:70%;overflow-y:auto;animation:slideUp 0.28s cubic-bezier(.32,.72,0,1);box-sizing:border-box;">
+            <div style="width:36px;height:4px;background:var(--border);border-radius:999px;margin:0 auto 16px;"></div>
+            <button onClick="{{ closeNotif }}" style="position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:50%;background:var(--surface2);border:none;color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:14px;">Notificaciones</div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <sc-for list="{{ notifications }}" as="nt" hint-placeholder-count="3">
+                <button onClick="{{ nt.open }}" style="display:flex;gap:12px;align-items:flex-start;background:none;border:none;padding:0;text-align:left;cursor:pointer;width:100%;font-family:inherit;">
+                  <div style="width:38px;height:38px;border-radius:12px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;">{{ nt.icon }}</div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;line-height:1.4;color:var(--text);">{{ nt.text }}</div>
+                    <div style="font-size:11px;color:var(--text2);margin-top:2px;">{{ nt.sub }}</div>
+                  </div>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ wrappedOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;z-index:110;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;">
+          <div onClick="{{ closeWrapped }}" style="position:absolute;inset:0;background:rgba(0,0,0,0.7);"></div>
+          <div style="position:relative;width:100%;background:linear-gradient(160deg,#152238,#3d3620 60%,#152238);border-radius:28px;padding:28px 22px;box-sizing:border-box;animation:popIn 0.3s ease;">
+            <button onClick="{{ closeWrapped }}" style="position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:14px;cursor:pointer;">✕</button>
+            <div style="font-size:10.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;">Campus Wrapped</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:700;color:#fff;margin-top:6px;margin-bottom:20px;">II Cuatrimestre 2026</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--accent);">9</div><div style="font-size:11.5px;color:rgba(255,255,255,0.6);">eventos asistidos</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--accent);">54h</div><div style="font-size:11.5px;color:rgba(255,255,255,0.6);">de TCU</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--accent);">6</div><div style="font-size:11.5px;color:rgba(255,255,255,0.6);">tutorías</div></div>
+              <div><div style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--accent);">6</div><div style="font-size:11.5px;color:rgba(255,255,255,0.6);">semanas de racha</div></div>
+            </div>
+            <button style="width:100%;padding:14px;border-radius:999px;border:none;background:var(--accent);color:#152238;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;">Compartir en Instagram</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ confettiOn }}" hint-placeholder-val="{{ false }}">
+        <sc-for list="{{ confettiParticles }}" as="p" hint-placeholder-count="18">
+          <div style="position:absolute;top:0;left:{{ p.left }}%;width:8px;height:8px;background:{{ p.color }};transform:rotate({{ p.rotate }}deg);animation-name:confettiFall;animation-duration:{{ p.duration }}s;animation-timing-function:ease-in;animation-fill-mode:forwards;animation-delay:{{ p.delay }}s;z-index:200;border-radius:2px;pointer-events:none;"></div>
+        </sc-for>
+      </sc-if>
+
+    </div>
+  </x-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const ACCENT = '#F4C93F';
+
+const SHEET_DB = {
+  e1: { title: 'Charla: IA en la Industria', tag: 'Conferencia', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F4C93F', when: 'Hoy · 4:00 p.m. – 6:00 p.m.', place: 'Auditorio Principal, Campus San Pedro', summary: 'Casos reales de adopción de IA en la industria costarricense: banca, salud y manufactura. Incluye demo en vivo y espacio de preguntas.', points: 50, attendees: [{ ini: 'MF', bg: '#FF6B5B' }, { ini: 'JU', bg: '#8FA8FF' }, { ini: 'KC', bg: '#3DDBB0' }, { ini: 'AS', bg: '#C88FFF' }], attendeeCount: 75, photoCaption: 'foto: auditorio — charla de IA', showAttendees: true, kind: 'evento' },
+  e2: { title: 'Torneo Interfacultades de Fútbol', tag: 'Deporte', tagBg: 'rgba(61,219,176,0.15)', tagFg: '#3DDBB0', when: 'Sábado · 8:00 a.m.', place: 'Cancha Deportiva, Campus San Pedro', summary: 'Seis semanas de liga entre facultades, equipos mixtos de 7 jugadores. Partidos todos los sábados por la mañana.', points: 70, attendees: [{ ini: 'EM', bg: '#F4C93F' }, { ini: 'KC', bg: '#3DDBB0' }, { ini: 'LM', bg: '#8FA8FF' }], attendeeCount: 62, photoCaption: 'foto: cancha — torneo interfacultades', showAttendees: true, kind: 'vida' },
+  e3: { title: 'Feria de Empleo Fidélitas 2026', tag: 'Feria', tagBg: 'rgba(255,107,91,0.15)', tagFg: '#FF6B5B', when: 'En 3 semanas · 9:00 a.m. – 4:00 p.m.', place: 'Plaza Central, Campus Heredia', summary: 'Más de 30 empresas reclutando en sitio, entrevistas exprés y asesoría de CV gratuita.', points: 60, attendees: [{ ini: 'LM', bg: '#8FA8FF' }, { ini: 'AS', bg: '#C88FFF' }, { ini: 'SL', bg: '#3DDBB0' }], attendeeCount: 213, photoCaption: 'foto: plaza — feria de empleo', showAttendees: true, kind: 'evento' },
+  e4: { title: 'Club de Programación Competitiva', tag: 'Club', tagBg: 'rgba(143,168,255,0.15)', tagFg: '#8FA8FF', when: 'Miércoles · 5:00 p.m. – 7:00 p.m.', place: 'Laboratorio C-201', summary: 'Sesiones semanales de resolución de problemas algorítmicos, preparación para el ICPC. Abierto a todos los niveles.', points: 50, attendees: [{ ini: 'AH', bg: '#8FA8FF' }, { ini: 'SL', bg: '#3DDBB0' }], attendeeCount: 24, photoCaption: 'foto: laboratorio — club de programación', showAttendees: true, kind: 'vida' },
+  e5: { title: 'Conferencia: Emprendimiento Tecnológico', tag: 'Conferencia', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F4C93F', when: 'En 5 semanas · 3:00 p.m.', place: 'Auditorio Principal, Campus San Pedro', summary: 'El camino real de un emprendimiento tech en Costa Rica: validación, MVP, primeros clientes y financiamiento.', points: 50, attendees: [{ ini: 'GM', bg: '#FF6B5B' }, { ini: 'VM', bg: '#C88FFF' }], attendeeCount: 54, photoCaption: 'foto: panel — emprendimiento tech', showAttendees: true, kind: 'evento' },
+  e7: { title: 'Hackathon Estudiantil Fidélitas', tag: 'Taller', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F4C93F', when: 'En 4 semanas · 8:00 a.m. (24 horas)', place: 'Laboratorios de Cómputo, Campus San Pedro', summary: '24 horas para construir una solución a un reto real. Equipos de 3 a 5 personas, mentorías durante toda la jornada y premios en efectivo.', points: 100, attendees: [{ ini: 'KC', bg: '#3DDBB0' }, { ini: 'SL', bg: '#8FA8FF' }], attendeeCount: 41, photoCaption: 'foto: laboratorio — hackathon', showAttendees: true, kind: 'vida' },
+  e6: { title: 'Noche de Networking con Egresados', tag: 'Networking', tagBg: 'rgba(200,143,255,0.15)', tagFg: '#C88FFF', when: 'En 2 semanas · 6:30 p.m.', place: 'Sala de Innovación', summary: 'Conversá con egresados que ya están trabajando en tu área. Mesas rotativas por área profesional, refrigerio incluido.', points: 45, attendees: [{ ini: 'AH', bg: '#8FA8FF' }], attendeeCount: 29, photoCaption: 'foto: sala — networking egresados', showAttendees: true, kind: 'vida' },
+  o1: { title: 'Práctica en NimbusTech', tag: 'Práctica', tagBg: 'rgba(143,168,255,0.15)', tagFg: '#8FA8FF', when: '4 meses · Lun–Vie 8am–1pm', place: 'Modalidad híbrida', summary: 'Desarrollo de Software · Viáticos de transporte, certificado oficial y posible contratación. Tutor: Ing. Laura Chaves.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: oficina — NimbusTech', showAttendees: false, kind: 'oportunidad' },
+  o2: { title: 'Beca de Excelencia Académica', tag: 'Beca', tagBg: 'rgba(255,107,91,0.15)', tagFg: '#FF6B5B', when: 'Cierra 31 jul · 50% de matrícula', place: 'Universidad Fidélitas', summary: 'Para estudiantes con promedio mínimo 90. Solicitud en línea y revisión de expediente.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: campus — becas', showAttendees: false, kind: 'oportunidad' },
+  o3: { title: 'AWS Certified Cloud Practitioner', tag: 'Certificación', tagBg: 'rgba(61,219,176,0.15)', tagFg: '#3DDBB0', when: '4–6 semanas · $100', place: 'Virtual', summary: 'Fundamentos de cloud computing con Amazon Web Services. Alta demanda en roles junior de infraestructura.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: laptop — certificación cloud', showAttendees: false, kind: 'oportunidad' },
+  o4: { title: 'Beca Fulbright Costa Rica', tag: 'Beca', tagBg: 'rgba(255,107,91,0.15)', tagFg: '#FF6B5B', when: 'Cierra 15 set · Cobertura completa', place: 'Estados Unidos', summary: 'Estudios de posgrado en EE.UU. Requiere TOEFL avanzado y promedio mínimo 85.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: bandera — beca Fulbright', showAttendees: false, kind: 'oportunidad' },
+  o5: { title: 'Meta Front-End Developer', tag: 'Certificación', tagBg: 'rgba(61,219,176,0.15)', tagFg: '#3DDBB0', when: '5–7 meses · $49/mes', place: 'Virtual', summary: 'React, JavaScript y UX/UI básico. Muy reconocida para roles de frontend junior.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: código — certificación Meta', showAttendees: false, kind: 'oportunidad' },
+  b1: { title: '₡5.000 en Cafetería', tag: 'Beneficio', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F5F3EF', when: '5,000 pts · vence en 30 días', place: 'Cualquier sede, Campus Central', summary: 'Canjeá tus puntos por saldo en la cafetería. Válido para consumo inmediato.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: cafetería — beneficio', showAttendees: false, kind: 'beneficio' },
+  b2: { title: 'Mentoría 1:1 con egresado', tag: 'Beneficio', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F5F3EF', when: '2,500 pts · 45 min', place: 'Virtual', summary: 'Sesión personalizada con un egresado destacado de tu carrera.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: videollamada — mentoría', showAttendees: false, kind: 'beneficio' },
+  b3: { title: 'Voucher Uber ₡2.000', tag: 'Beneficio', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F5F3EF', when: '2,000 pts', place: 'UberX y Flash', summary: 'Código digital para tu próximo viaje dentro del GAM.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: auto — voucher transporte', showAttendees: false, kind: 'beneficio' },
+  tut1: { title: 'Tutoría 1:1 de Álgebra Lineal', profesor: 'Andrés Morales — Profesor', tag: 'Tutoría', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F4C93F', when: 'Martes · 4:00 p.m. – 5:00 p.m.', costo: '₡8.000 / hora', summary: 'Repaso de vectores, matrices y transformaciones lineales, con ejercicios guiados según tu curso actual.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: pizarra — tutoría de álgebra', showAttendees: false, kind: 'tutoria' },
+  tut2: { title: 'Tutoría 1:1 de Programación en Python', profesor: 'Sofía Ramírez — Estudiante avanzada', tag: 'Tutoría', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F4C93F', when: 'Jueves · 6:00 p.m. – 7:00 p.m.', costo: 'Gratuita', summary: 'Fundamentos de programación: variables, condicionales, ciclos y funciones, con ejercicios prácticos.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: laptop — tutoría de Python', showAttendees: false, kind: 'tutoria' },
+  tut3: { title: 'Tutoría 1:1 de Contabilidad Financiera', profesor: 'Prof. Marco Salas', tag: 'Tutoría', tagBg: 'rgba(21,34,56,0.65)', tagFg: '#F4C93F', when: 'Sábado · 9:00 a.m. – 10:00 a.m.', costo: '₡6.000 / hora', summary: 'Estados financieros, asientos contables y análisis de razones — enfocado en preparar tus exámenes parciales.', points: 0, attendees: [], attendeeCount: 0, photoCaption: 'foto: cuaderno — tutoría de contabilidad', showAttendees: false, kind: 'tutoria' },
+};
+
+const STORY_IDS = [
+  { id: 'e1', label: 'IA hoy', emoji: '🎤', color: '#F4C93F' },
+  { id: 'e2', label: 'Fútbol', emoji: '⚽', color: '#3DDBB0' },
+  { id: 'e4', label: 'Club Prog.', emoji: '💻', color: '#8FA8FF' },
+  { id: 'e6', label: 'Networking', emoji: '🤝', color: '#C88FFF' },
+  { id: 'e3', label: 'Feria empleo', emoji: '🏢', color: '#FF6B5B' },
+];
+
+const TUTORIAS_BASE = [
+  { id: 't1', materia: 'Finanzas Corporativas', profesor: 'Prof. R. Salas', modalidad: 'Presencial', tipo: 'Institucional', rating: 4.8, when: 'Hoy · 4:00 p.m.' },
+  { id: 't2', materia: 'Mercadeo Estratégico', profesor: 'Lic. Karol Jiménez', modalidad: 'Virtual', tipo: 'Gratuita', rating: 4.6, when: 'Mañana · 10:00 a.m.' },
+  { id: 't3', materia: 'Excel Avanzado para Negocios', profesor: 'Lic. Fabián Rojas', modalidad: 'Virtual', tipo: 'Premium', rating: 4.9, when: 'Jueves · 6:00 p.m.' },
+  { id: 't4', materia: 'Fundamentos de Adm. de Proyectos', profesor: 'Prof. C. Ricketts', modalidad: 'Presencial', tipo: 'Institucional', rating: 4.7, when: 'Sábado · 8:00 a.m.' },
+];
+
+const CONFETTI_COLORS = ['#F4C93F', '#FF6B5B', '#3DDBB0', '#8FA8FF', '#C88FFF'];
+const CONFETTI_PARTICLES = Array.from({ length: 18 }).map((_, i) => ({
+  left: (i * 23 + 5) % 96,
+  color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+  delay: ((i % 6) * 0.06).toFixed(2),
+  duration: (1.1 + (i % 5) * 0.15).toFixed(2),
+  rotate: (i * 47) % 360,
+}));
+
+const ETAPA_NAMES = ['Inscripción', 'Asignación', 'Ejecución', 'Informe final', 'Aprobación'];
+
+const FRIEND_DIRECTORY = [
+  { name: 'Kevin Chaves', email: 'kevin.chaves@ufidelitas.ac.cr', ini: 'KC', carrera: 'Ingeniería Industrial' },
+  { name: 'Andrea Solís', email: 'andrea.solis@ufidelitas.ac.cr', ini: 'AS', carrera: 'Mercadeo' },
+  { name: 'Suri González', email: 'suri.gonzalez@ufidelitas.ac.cr', ini: 'SG', carrera: 'Ingeniería de Software' },
+  { name: 'Jorge Ureña', email: 'jorge.urena@ufidelitas.ac.cr', ini: 'JU', carrera: 'Administración de Negocios' },
+];
+
+function etapaIndex(horas) {
+  if (horas >= 150) return 4;
+  if (horas >= 140) return 3;
+  if (horas >= 40) return 2;
+  if (horas >= 20) return 1;
+  return 0;
+}
+
+function nivelInfo(points) {
+  if (points >= 7000) return { actual: 'Oro', pct: 100, restante: 'Nivel máximo alcanzado 🏆' };
+  if (points >= 3000) {
+    const pct = Math.min(100, Math.round(((points - 3000) / 4000) * 100));
+    return { actual: 'Plata', pct, restante: (7000 - points) + ' pts para Oro' };
+  }
+  const pct = Math.min(100, Math.round((points / 3000) * 100));
+  return { actual: 'Bronce', pct, restante: (3000 - points) + ' pts para Plata' };
+}
+
+class Component extends DCLogic {
+  state = {
+    screen: 'splash',
+    tab: 'inicio',
+    theme: 'dark',
+    checkedIn: false,
+    checkinStreak: 12,
+    points: 2450,
+    confettiOn: false,
+    sheetId: null,
+    inscribedIds: ['e1'],
+    wrappedOpen: false,
+    discoverFilter: 'todo',
+    chatMessages: [{ fromUser: false, fromAi: true, text: '¡Pura vida, Andrés! Soy Rasta 🌊 tu compa en Campus360. ¿En qué te ayudo hoy?' }],
+    chatDraft: '',
+    loginEmail: 'andres.rojas@ufidelitas.ac.cr',
+    loginPassword: '',
+    tutoriaFilter: 'Todas',
+    agendadas: ['t1'],
+    tcuHoras: 54,
+    bitFecha: '',
+    bitHorasInput: '',
+    bitDesc: '',
+    bitacoraList: [
+      { fecha: '2026-07-15', horas: 4, desc: 'Capacitación en gestión de inventario a microempresa', estado: 'registrada' },
+      { fecha: '2026-06-28', horas: 5, desc: 'Levantamiento de indicadores para proyecto social', estado: 'aprobada' },
+      { fecha: '2026-06-12', horas: 6, desc: 'Apoyo administrativo en feria de emprendimiento estudiantil', estado: 'aprobada' },
+    ],
+    objetivos: [
+      { id: 'ob1', texto: 'Registrar 6 horas de TCU', hecho: false },
+      { id: 'ob2', texto: 'Entregar avance de Adm. de Proyectos', hecho: true },
+      { id: 'ob3', texto: 'Agendar tutoría de Finanzas Corporativas', hecho: true },
+      { id: 'ob4', texto: 'Inscribirse a la Feria de Empleo', hecho: false },
+    ],
+    rachaSemanas: 4,
+    friendEmail: '',
+    friendMessage: '',
+    friends: [
+      { name: 'Sofía Loaiza', email: 'sofia.loaiza@ufidelitas.ac.cr', ini: 'SL', carrera: 'Ingeniería de Software' },
+      { name: 'Andrés Hidalgo', email: 'andres.hidalgo@ufidelitas.ac.cr', ini: 'AH', carrera: 'Ingeniería de Software' },
+    ],
+    receivedRequests: [
+      { name: 'María Fernández', email: 'maria.fernandez@ufidelitas.ac.cr', ini: 'MF', carrera: 'Psicología' },
+      { name: 'Luis Mora', email: 'luis.mora@ufidelitas.ac.cr', ini: 'LM', carrera: 'Ingeniería Civil' },
+    ],
+    sentRequests: [],
+    badgesExpanded: false,
+    storyFlow: null,
+    eventStories: {
+      e1: [{ ini: 'MF', bg: '#FF6B5B' }, { ini: 'KC', bg: '#3DDBB0' }],
+      e2: [{ ini: 'LM', bg: '#8FA8FF' }],
+      e4: [],
+      e6: [],
+      e3: [{ ini: 'AS', bg: '#C88FFF' }],
+    },
+    notifOpen: false,
+    notifications: [
+      { id: 'n1', icon: '🏆', text: 'Andrés Hidalgo alcanzó Nivel Oro', sub: '+100 pts ganados', unread: true },
+      { id: 'n2', icon: '👋', text: 'Emilio Mora te mandó una solicitud de amistad', sub: 'Revisá tu perfil para aceptarla', unread: true, isRequest: true },
+      { id: 'n3', icon: '🎉', text: 'Se habilitó el Hackathon Estudiantil Fidélitas', sub: 'Inscripciones abiertas — cupo limitado', unread: true, eventId: 'e7' },
+    ],
+  };
+
+  triggerConfetti = () => {
+    this.setState({ confettiOn: false });
+    setTimeout(() => {
+      this.setState({ confettiOn: true });
+      setTimeout(() => this.setState({ confettiOn: false }), 1600);
+    }, 20);
+  };
+
+  storiesRef = React.createRef();
+  scrollStories = (dir) => { if (this.storiesRef.current) this.storiesRef.current.scrollBy({ left: dir * 160, behavior: 'smooth' }); };
+  filtersRef = React.createRef();
+  scrollFilters = (dir) => { if (this.filtersRef.current) this.filtersRef.current.scrollBy({ left: dir * 140, behavior: 'smooth' }); };
+  chipsRef = React.createRef();
+  scrollChips = (dir) => { if (this.chipsRef.current) this.chipsRef.current.scrollBy({ left: dir * 160, behavior: 'smooth' }); };
+  goLogin = () => this.setState({ screen: 'login' });
+  enterApp = () => this.setState({ screen: 'app' });
+  onChangeLoginEmail = (e) => this.setState({ loginEmail: e.target.value });
+  onChangeLoginPassword = (e) => this.setState({ loginPassword: e.target.value });
+  goInicio = () => this.setState({ tab: 'inicio' });
+  goDescubrir = () => this.setState({ tab: 'descubrir' });
+  goAsistente = () => this.setState({ tab: 'asistente' });
+  goCamino = () => this.setState({ tab: 'camino' });
+  goPerfil = () => this.setState({ tab: 'perfil' });
+  setDark = () => this.setState({ theme: 'dark' });
+  setLight = () => this.setState({ theme: 'light' });
+
+  doCheckin = () => {
+    if (this.state.checkedIn) return;
+    this.setState(s => ({ checkedIn: true, points: s.points + 15, checkinStreak: s.checkinStreak + 1 }));
+    this.triggerConfetti();
+  };
+
+  openSheet = (id) => this.setState({ sheetId: id });
+  closeSheet = () => this.setState({ sheetId: null });
+
+  toggleInscribir = () => {
+    const id = this.state.sheetId;
+    if (!id) return;
+    const item = SHEET_DB[id];
+    const inscribed = this.state.inscribedIds.includes(id);
+    if (inscribed) {
+      this.setState(s => ({ inscribedIds: s.inscribedIds.filter(x => x !== id), points: s.points - item.points }));
+    } else {
+      this.setState(s => ({ inscribedIds: [...s.inscribedIds, id], points: s.points + item.points }));
+      this.triggerConfetti();
+    }
+  };
+
+  contactTutor = () => this.triggerConfetti();
+
+  openWrapped = () => this.setState({ wrappedOpen: true });
+  closeWrapped = () => this.setState({ wrappedOpen: false });
+
+  setDiscoverFilter = (key) => this.setState({ discoverFilter: key });
+
+  onChangeChatDraft = (e) => this.setState({ chatDraft: e.target.value });
+
+  pushChat = (userText, aiText) => {
+    this.setState(s => ({ chatMessages: [...s.chatMessages, { fromUser: true, fromAi: false, text: userText }] }));
+    setTimeout(() => {
+      this.setState(s => ({ chatMessages: [...s.chatMessages, { fromUser: false, fromAi: true, text: aiText }] }));
+    }, 450);
+  };
+
+  sendChip = (type) => {
+    const horas = this.state.tcuHoras;
+    if (type === 'tcu') {
+      this.pushChat('¿Cuántas horas de TCU me faltan?', 'Vas en ' + horas + ' de 150 horas de TCU (' + Math.round(horas / 150 * 100) + '%) 💪 Te faltan ' + (150 - horas) + ' horas. Estás en la etapa de Ejecución — ¡seguí así!');
+    } else if (type === 'hoy') {
+      this.pushChat('¿Qué hay hoy en campus?', 'Hoy tenés: 🎤 Charla de IA en la Industria a las 4:00 p.m. en el Auditorio Principal, y tu tutoría de Finanzas Corporativas también a las 4:00 p.m. ¿Te ayudo a elegir?');
+    } else if (type === 'tutoria') {
+      this.pushChat('Agendame una tutoría', '¡Listo! Te agendé la tutoría de Finanzas Corporativas para hoy a las 4:00 p.m. con el Prof. R. Salas 📅✅');
+      this.setState(s => ({ agendadas: s.agendadas.includes('t1') ? s.agendadas : [...s.agendadas, 't1'], points: s.points + 20 }));
+      this.triggerConfetti();
+    } else if (type === 'evento') {
+      this.pushChat('Recomendame un evento', 'Por tu carrera (Administración de Negocios) te recomiendo la Conferencia de Emprendimiento Tecnológico — vas a conectar con gente que ya armó su propia empresa 🚀');
+    }
+  };
+
+  sendChatFree = () => {
+    const text = this.state.chatDraft.trim();
+    if (!text) return;
+    this.setState({ chatDraft: '' });
+    this.pushChat(text, '¡Buena pregunta! Por ahora puedo ayudarte mejor con TCU, tutorías y eventos — probá uno de los accesos rápidos 👇');
+  };
+
+  setTutoriaFilter = (label) => this.setState({ tutoriaFilter: label });
+
+  toggleAgendar = (id) => {
+    const has = this.state.agendadas.includes(id);
+    if (has) {
+      this.setState(s => ({ agendadas: s.agendadas.filter(x => x !== id), points: s.points - 20 }));
+    } else {
+      this.setState(s => ({ agendadas: [...s.agendadas, id], points: s.points + 20 }));
+      this.triggerConfetti();
+    }
+  };
+
+  onChangeBitFecha = (e) => this.setState({ bitFecha: e.target.value });
+  onChangeBitHoras = (e) => this.setState({ bitHorasInput: e.target.value });
+  onChangeBitDesc = (e) => this.setState({ bitDesc: e.target.value });
+
+  addBitacora = () => {
+    const horas = parseInt(this.state.bitHorasInput, 10) || 2;
+    const fecha = this.state.bitFecha.trim() || 'Hoy';
+    const desc = this.state.bitDesc.trim() || 'Actividad registrada';
+    this.setState(s => ({
+      bitacoraList: [{ fecha, horas, desc, estado: 'registrada' }, ...s.bitacoraList],
+      tcuHoras: Math.min(150, s.tcuHoras + horas),
+      points: s.points + horas * 5,
+      bitFecha: '', bitHorasInput: '', bitDesc: '',
+    }));
+    this.triggerConfetti();
+  };
+
+  onChangeFriendEmail = (e) => this.setState({ friendEmail: e.target.value, friendMessage: '' });
+
+  sendFriendRequest = () => {
+    const email = this.state.friendEmail.trim().toLowerCase();
+    if (!email) { this.setState({ friendMessage: 'Escribí un correo institucional.' }); return; }
+    if (this.state.friends.some(f => f.email === email)) { this.setState({ friendMessage: 'Ya son amigos 🎉' }); return; }
+    if (this.state.sentRequests.some(f => f.email === email)) { this.setState({ friendMessage: 'Ya le enviaste una solicitud — esperando respuesta.' }); return; }
+    if (this.state.receivedRequests.some(f => f.email === email)) { this.setState({ friendMessage: 'Esa persona ya te envió una solicitud — revisá "Solicitudes recibidas".' }); return; }
+    const found = FRIEND_DIRECTORY.find(f => f.email === email);
+    if (!found) { this.setState({ friendMessage: 'No encontramos a nadie con ese correo institucional.' }); return; }
+    this.setState(s => ({ sentRequests: [...s.sentRequests, found], friendEmail: '', friendMessage: '¡Solicitud enviada a ' + found.name + '!' }));
+  };
+
+  acceptFriendRequest = (email) => {
+    this.setState(s => {
+      const person = s.receivedRequests.find(r => r.email === email);
+      return { friends: [...s.friends, person], receivedRequests: s.receivedRequests.filter(r => r.email !== email) };
+    });
+    this.triggerConfetti();
+  };
+
+  rejectFriendRequest = (email) => this.setState(s => ({ receivedRequests: s.receivedRequests.filter(r => r.email !== email) }));
+
+  openNotif = () => this.setState(s => ({ notifOpen: true, notifications: s.notifications.map(n => ({ ...n, unread: false })) }));
+  closeNotif = () => this.setState({ notifOpen: false });
+  goToFriendsFromNotif = () => this.setState({ notifOpen: false, tab: 'perfil' });
+  goToEventFromNotif = (id) => this.setState({ notifOpen: false, sheetId: id });
+  toggleBadges = () => this.setState(s => ({ badgesExpanded: !s.badgesExpanded }));
+
+  openCapture = () => this.setState({ storyFlow: 'capture' });
+  closeStoryFlow = () => this.setState({ storyFlow: null });
+  goToPreview = () => this.setState({ storyFlow: 'preview' });
+  goToTagStep = () => this.setState({ storyFlow: 'tag' });
+  postStory = (eventId) => {
+    this.setState(s => {
+      const existing = s.eventStories[eventId] || [];
+      const already = existing.some(p => p.ini === 'AR');
+      const updated = already ? existing : [...existing, { ini: 'AR', bg: '#F4C93F' }];
+      return { eventStories: { ...s.eventStories, [eventId]: updated }, storyFlow: null };
+    });
+    this.triggerConfetti();
+  };
+
+  toggleObjetivo = (id) => {
+    this.setState(s => {
+      const objetivos = s.objetivos.map(o => o.id === id ? { ...o, hecho: !o.hecho } : o);
+      const target = s.objetivos.find(o => o.id === id);
+      return { objetivos, points: s.points + (target.hecho ? -10 : 10) };
+    });
+    if (!this.state.objetivos.find(o => o.id === id).hecho) this.triggerConfetti();
+  };
+
+  renderVals() {
+    const s = this.state;
+    const isDark = s.theme === 'dark';
+    const tokens = isDark
+      ? { bg: '#152238', surface: '#1D2E4A', surface2: '#28405F', border: 'rgba(255,255,255,0.08)', text: '#F6F1E8', text2: 'rgba(246,241,232,0.62)', text3: 'rgba(246,241,232,0.4)', accent: '#F4C93F' }
+      : { bg: '#DDE3EA', surface: '#EFF3F7', surface2: '#CBD6E0', border: 'rgba(15,35,60,0.10)', text: '#152238', text2: 'rgba(21,34,56,0.62)', text3: 'rgba(21,34,56,0.38)', accent: '#C9971F' };
+    const accent = tokens.accent;
+
+    const activeColor = (tab) => s.tab === tab ? accent : tokens.text3;
+
+    const storyItems = STORY_IDS.map(st => ({ ...st, open: () => this.openSheet(st.id) }));
+
+    const feedDefs = [
+      { ...SHEET_DB.e1, id: 'e1', isEvento: true, isLogro: false, isRecordatorio: false, isNoticia: false, avatars: SHEET_DB.e1.attendees.slice(0, 3), open: () => this.openSheet('e1') },
+      { isEvento: false, isLogro: true, isRecordatorio: false, isNoticia: false, title: 'Sofía Loaiza completó sus 30 horas de TCU 🎉', points: 50, avatarBg: '#3DDBB0', avatarIni: 'SL' },
+      { isEvento: false, isLogro: false, isRecordatorio: true, isNoticia: false, title: 'Tu tutoría de Finanzas Corporativas es en 2 horas', open: () => this.setState({ tab: 'camino' }) },
+      { ...SHEET_DB.e2, id: 'e2', isEvento: true, isLogro: false, isRecordatorio: false, isNoticia: false, avatars: SHEET_DB.e2.attendees.slice(0, 3), open: () => this.openSheet('e2') },
+      { isEvento: false, isLogro: false, isRecordatorio: false, isNoticia: true, title: 'Fidélitas inaugura nuevo laboratorio de innovación' },
+      { ...SHEET_DB.e3, id: 'e3', isEvento: true, isLogro: false, isRecordatorio: false, isNoticia: false, avatars: SHEET_DB.e3.attendees.slice(0, 3), open: () => this.openSheet('e3') },
+    ];
+
+    const DISCOVER_FILTER_DEFS = [
+      { key: 'todo', label: 'Todo' },
+      { key: 'tutoria', label: 'Tutorías' },
+      { key: 'evento', label: 'Eventos' },
+      { key: 'vida', label: 'Vida U' },
+      { key: 'oportunidad', label: 'Oportunidades' },
+      { key: 'beneficio', label: 'Beneficios' },
+    ];
+    const discoverFilters = DISCOVER_FILTER_DEFS.map(f => {
+      const active = s.discoverFilter === f.key;
+      return { ...f, setActive: () => this.setDiscoverFilter(f.key), bg: active ? accent : tokens.surface, fg: active ? '#152238' : tokens.text };
+    });
+    const discoverItems = Object.entries(SHEET_DB)
+      .filter(([id, v]) => s.discoverFilter === 'todo' || v.kind === s.discoverFilter)
+      .map(([id, v]) => ({ id, title: v.title, tag: v.tag, tagBg: v.tagBg, tagFg: v.tagFg, meta: v.when, photoCaption: v.photoCaption, open: () => this.openSheet(id) }));
+
+    let sheetItem = null;
+    if (s.sheetId) {
+      const base = SHEET_DB[s.sheetId];
+      const inscrito = s.inscribedIds.includes(s.sheetId);
+      let ctaLabel, ctaOnClick;
+      if (base.kind === 'oportunidad') { ctaLabel = inscrito ? 'Solicitud enviada ✅' : 'Solicitar'; ctaOnClick = this.toggleInscribir; }
+      else if (base.kind === 'beneficio') { ctaLabel = inscrito ? 'Canjeado ✅' : 'Canjear con puntos'; ctaOnClick = this.toggleInscribir; }
+      else if (base.kind === 'tutoria') { ctaLabel = inscrito ? 'Comunicarme' : 'Inscribirme'; ctaOnClick = inscrito ? this.contactTutor : this.toggleInscribir; }
+      else { ctaLabel = inscrito ? 'Ya estás inscrito ✅' : 'Inscribirme' + (base.points ? ' (+' + base.points + ' pts)' : ''); ctaOnClick = this.toggleInscribir; }
+      const storyAvatars = s.eventStories[s.sheetId] || [];
+      const isTutoriaContact = base.kind === 'tutoria' && inscrito;
+      const ctaBg = isTutoriaContact ? '#3DDBB0' : (inscrito ? tokens.surface2 : accent);
+      const ctaFg = isTutoriaContact ? '#0F3D33' : (inscrito ? tokens.text2 : '#152238');
+      sheetItem = { ...base, id: s.sheetId, isTutoria: base.kind === 'tutoria', isNotTutoria: base.kind !== 'tutoria', ctaLabel, ctaOnClick, ctaBg, ctaFg, eventStoryAvatars: storyAvatars, hasEventStories: storyAvatars.length > 0 };
+    }
+
+    const chatSuggestions = [
+      { label: '¿Cuántas horas de TCU me faltan?', send: () => this.sendChip('tcu') },
+      { label: '¿Qué hay hoy en campus?', send: () => this.sendChip('hoy') },
+      { label: 'Agendame una tutoría', send: () => this.sendChip('tutoria') },
+      { label: 'Recomendame un evento', send: () => this.sendChip('evento') },
+    ];
+
+    const idx = etapaIndex(s.tcuHoras);
+    const etapas = ETAPA_NAMES.map((nombre, i) => {
+      const done = i < idx, current = i === idx;
+      return {
+        nombre,
+        dotBg: (done || current) ? accent : tokens.surface2,
+        dotFg: (done || current) ? '#152238' : tokens.text3,
+        dotContent: done ? '✓' : String(i + 1),
+      };
+    });
+    const circumference = 301.6;
+    const tcuRingOffset = Math.round(circumference * (1 - Math.min(1, s.tcuHoras / 150)));
+
+    const TUTORIA_FILTER_DEFS = ['Todas', 'Virtual', 'Presencial', 'Premium'];
+    const tutoriaFilters = TUTORIA_FILTER_DEFS.map(label => {
+      const active = s.tutoriaFilter === label;
+      return { label, setActive: () => this.setTutoriaFilter(label), bg: active ? accent : tokens.surface, fg: active ? '#152238' : tokens.text };
+    });
+    const tutorias = TUTORIAS_BASE.filter(t => {
+      if (s.tutoriaFilter === 'Todas') return true;
+      if (s.tutoriaFilter === 'Virtual') return t.modalidad === 'Virtual';
+      if (s.tutoriaFilter === 'Presencial') return t.modalidad === 'Presencial';
+      if (s.tutoriaFilter === 'Premium') return t.tipo === 'Premium';
+      return true;
+    }).map(t => {
+      const agendada = s.agendadas.includes(t.id);
+      return { ...t, agendada, btnLabel: agendada ? 'Agendada ✅' : 'Agendar', btnBg: agendada ? tokens.surface2 : accent, btnFg: agendada ? tokens.text2 : '#152238', toggle: () => this.toggleAgendar(t.id) };
+    });
+
+    const WEEK_LABELS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+    const weekDays = WEEK_LABELS.map((label, i) => ({ label, bg: i === 2 ? accent : tokens.surface, fg: i === 2 ? '#152238' : tokens.text2 }));
+    const agendaItems = [
+      { day: 'Mié (hoy)', time: '4:00 p.m.', title: 'Tutoría de Finanzas Corporativas' },
+      { day: 'Jue', time: '6:00 p.m.', title: 'Tutoría de Excel Avanzado' },
+      { day: 'Vie', time: '11:59 p.m.', title: 'Entrega: avance Adm. de Proyectos' },
+      { day: 'Sáb', time: '8:00 a.m.', title: 'Torneo de Fútbol — práctica' },
+    ];
+
+    const objetivos = s.objetivos.map(o => ({
+      ...o,
+      toggle: () => this.toggleObjetivo(o.id),
+      boxBg: o.hecho ? accent : 'transparent',
+      boxBorder: o.hecho ? accent : tokens.border,
+      checkMark: o.hecho ? '✓' : '',
+      textColor: o.hecho ? tokens.text2 : tokens.text,
+      textDecoration: o.hecho ? 'line-through' : 'none',
+    }));
+
+    const bitacoraList = s.bitacoraList.map(b => ({ ...b, estadoColor: b.estado === 'aprobada' ? '#3DDBB0' : tokens.text2 }));
+
+    const nivel = nivelInfo(s.points);
+    const insignias = [
+      { nombre: 'Primera tutoría', unlocked: true, icon: 'tutoria' },
+      { nombre: '50h de TCU', unlocked: s.tcuHoras >= 50, icon: 'tcu' },
+      { nombre: 'Asistente frecuente', unlocked: true, icon: 'asistente' },
+      { nombre: 'Racha de 4 semanas', unlocked: s.rachaSemanas >= 4, icon: 'racha' },
+      { nombre: 'Voluntario del mes', unlocked: false, icon: 'voluntario' },
+    ].map(b => ({
+      isTutoria: b.icon === 'tutoria', isTcu: b.icon === 'tcu', isAsistente: b.icon === 'asistente', isRacha: b.icon === 'racha', isVoluntario: b.icon === 'voluntario',
+      ...b,
+      chipBg: b.unlocked ? 'rgba(244,201,63,0.14)' : tokens.surface2,
+      dotBg: b.unlocked ? accent : 'transparent',
+      dotBorder: b.unlocked ? accent : tokens.text3,
+      detailStroke: b.unlocked ? '#152238' : tokens.text3,
+      textColor: b.unlocked ? tokens.text : tokens.text3,
+    }));
+    const badgesVisible = s.badgesExpanded ? insignias : insignias.slice(0, 4);
+    const showBadgesToggle = insignias.length > 4;
+    const badgesToggleLabel = s.badgesExpanded ? 'Ver menos' : 'Ver todas (' + insignias.length + ')';
+
+    const historialEventos = [
+      { title: 'Taller de Currículum y LinkedIn', when: 'hace 2 semanas' },
+      { title: 'Noche de Networking con Egresados', when: 'hace 1 mes' },
+      { title: 'Torneo Interfacultades de Fútbol', when: 'hace 1 mes' },
+    ];
+
+    return {
+      isDark, isSplash: s.screen === 'splash', isLoginScreen: s.screen === 'login', isApp: s.screen === 'app',
+      loginEmail: s.loginEmail, loginPassword: s.loginPassword, onChangeLoginEmail: this.onChangeLoginEmail, onChangeLoginPassword: this.onChangeLoginPassword, enterApp: this.enterApp,
+      bgColor: tokens.bg, surfaceColor: tokens.surface, surface2Color: tokens.surface2, borderColor: tokens.border, textColor: tokens.text, text2Color: tokens.text2, text3Color: tokens.text3, accentColor: accent,
+      goLogin: this.goLogin,
+      storiesRef: this.storiesRef, scrollStoriesLeft: () => this.scrollStories(-1), scrollStoriesRight: () => this.scrollStories(1),
+      tab: s.tab, tabInicio: s.tab === 'inicio', tabDescubrir: s.tab === 'descubrir', tabAsistente: s.tab === 'asistente', tabCamino: s.tab === 'camino', tabPerfil: s.tab === 'perfil',
+      goInicio: this.goInicio, goDescubrir: this.goDescubrir, goAsistente: this.goAsistente, goCamino: this.goCamino, goPerfil: this.goPerfil,
+      inicioColor: activeColor('inicio'), descubrirColor: activeColor('descubrir'), caminoColor: activeColor('camino'), perfilColor: activeColor('perfil'),
+      storyItems, openCapture: this.openCapture,
+      storyRingBg: Object.values(s.eventStories).some(arr => arr.some(p => p.ini === 'AR')) ? 'linear-gradient(135deg,#C88FFF,#FF6B9D)' : 'transparent',
+      isCapture: s.storyFlow === 'capture', isPreview: s.storyFlow === 'preview', isTagStep: s.storyFlow === 'tag',
+      closeStoryFlow: this.closeStoryFlow, goToPreview: this.goToPreview, goToTagStep: this.goToTagStep,
+      tagOptions: STORY_IDS.map(st => ({ ...st, tagIt: () => this.postStory(st.id) })),
+      notifOpen: s.notifOpen, openNotif: this.openNotif, closeNotif: this.closeNotif,
+      notifications: s.notifications.map(n => ({ ...n, open: n.isRequest ? this.goToFriendsFromNotif : (n.eventId ? () => this.goToEventFromNotif(n.eventId) : null) })),
+      hasUnreadNotif: s.notifications.some(n => n.unread),
+      checkinStreak: s.checkinStreak, checkinLabel: s.checkedIn ? 'Check-in listo' : 'Marcar asistencia hoy (+15 pts)', checkinBg: s.checkedIn ? '#3DDBB0' : accent, checkinFg: s.checkedIn ? '#0F3D33' : '#152238', doCheckin: this.doCheckin,
+      feedCards: feedDefs,
+      discoverFilters, discoverItems, filtersRef: this.filtersRef, scrollFiltersLeft: () => this.scrollFilters(-1), scrollFiltersRight: () => this.scrollFilters(1),
+      chipsRef: this.chipsRef, scrollChipsLeft: () => this.scrollChips(-1), scrollChipsRight: () => this.scrollChips(1),
+      sheetOpen: !!s.sheetId, sheetItem: sheetItem || { id: 'none', photoCaption: '', tag: '', tagBg: '', tagFg: '', title: '', when: '', place: '', profesor: '', costo: '', isTutoria: false, isNotTutoria: true, summary: '', showAttendees: false, attendees: [], attendeeCount: 0, ctaLabel: '', ctaOnClick: null, ctaBg: '', ctaFg: '', eventStoryAvatars: [], hasEventStories: false },
+      closeSheet: this.closeSheet,
+      wrappedOpen: s.wrappedOpen, openWrapped: this.openWrapped, closeWrapped: this.closeWrapped,
+      chatMessages: s.chatMessages, chatSuggestions, chatDraft: s.chatDraft, onChangeChatDraft: this.onChangeChatDraft, sendChatFree: this.sendChatFree,
+      tcuHoras: s.tcuHoras, tcuRequeridas: 150, tcuRingOffset, tcuEtapaActual: ETAPA_NAMES[idx], etapas,
+      bitFecha: s.bitFecha, bitHorasInput: s.bitHorasInput, bitDesc: s.bitDesc, onChangeBitFecha: this.onChangeBitFecha, onChangeBitHoras: this.onChangeBitHoras, onChangeBitDesc: this.onChangeBitDesc, addBitacora: this.addBitacora, bitacoraList,
+      tutoriaFilters, tutorias,
+      weekDays, agendaItems,
+      objetivos, rachaSemanas: s.rachaSemanas,
+      nivelActual: nivel.actual, pointsLabel: s.points.toLocaleString('es-CR'), nivelProgressPct: nivel.pct, nivelRestante: nivel.restante,
+      insignias: badgesVisible, historialEventos,
+      showBadgesToggle, badgesToggleLabel, toggleBadges: this.toggleBadges,
+      friendEmail: s.friendEmail, onChangeFriendEmail: this.onChangeFriendEmail, sendFriendRequest: this.sendFriendRequest, friendMessage: s.friendMessage,
+      receivedRequests: s.receivedRequests.map(r => ({ ...r, accept: () => this.acceptFriendRequest(r.email), reject: () => this.rejectFriendRequest(r.email) })),
+      hasReceivedRequests: s.receivedRequests.length > 0,
+      sentRequests: s.sentRequests, hasSentRequests: s.sentRequests.length > 0,
+      friends: s.friends,
+      setLight: this.setLight, setDark: this.setDark, lightBtnBg: isDark ? 'transparent' : accent, darkBtnBg: isDark ? accent : 'transparent',
+      confettiOn: s.confettiOn, confettiParticles: CONFETTI_PARTICLES,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

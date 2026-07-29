@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Campus360 — súper-app móvil (Universidad Fidélitas)
+
+App móvil-first (Next.js 16 + React 19 + Tailwind + Supabase) implementada a partir
+del prototipo de diseño en `design-handoff/` (Claude Design). Reemplaza el portal de
+trámites de escritorio que tenía este repo por la experiencia tipo Instagram/Duolingo
+de 5 pestañas: **Inicio, Descubrir, Asistente IA (Rasta), Mi Camino, Perfil**.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrí [http://localhost:3000](http://localhost:3000). El flujo es: splash (`/`) →
+login (`/login`, correo institucional + contraseña demo `campus360`) → app (`/inicio`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables de entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Usa las que ya existían en este proyecto — no hace falta (ni se debe) inventar otras:
 
-## Learn More
+```
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+```
 
-To learn more about Next.js, take a look at the following resources:
+Estas viven en `.env.local` (ya committeado en este repo desde antes — ver nota de
+seguridad más abajo).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Base de datos (Supabase)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+El esquema original (`supabase/schema.sql` + `supabase/seed.sql`) cubre perfiles y TCU.
+Para las funciones nuevas de la app móvil (amigos, notificaciones, historias, objetivos,
+tutorías, inscripciones, y las columnas de puntos/racha en `perfiles`), corré **en este
+orden** en el SQL Editor de tu proyecto Supabase:
 
-## Deploy on Vercel
+1. `supabase/schema.sql` (si no lo corriste antes)
+2. `supabase/seed.sql`
+3. `supabase/schema_social.sql` — tablas nuevas + buckets de Storage (`avatares`, `historias`)
+4. `supabase/seed_social.sql` — agrega el perfil demo "Andrés Rojas" (persona validada
+   en el diseño) con su red de amigos/notificaciones de ejemplo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+No pude ejecutar ni verificar estos scripts contra una base real durante esta sesión
+(no hay conexión a Supabase disponible acá) — probalos vos y avisame si algo falla.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Qué es real vs. contenido de catálogo
+
+- **Real, en Supabase**: perfil, TCU (horas/etapas/bitácora), puntos, racha de check-in,
+  amigos/solicitudes, notificaciones, objetivos de la semana, inscripciones a
+  tutorías/eventos/oportunidades/beneficios, e historias (fotos subidas a Storage).
+- **Catálogo de contenido** (`src/data/*.ts`, igual que en el resto del proyecto):
+  eventos, vida universitaria, oportunidades, becas, certificaciones, beneficios y
+  tutorías. No tienen fotos reales todavía, así que las portadas usan un degradado +
+  el nombre de la categoría en vez de inventar URLs de imágenes.
+
+## ⚠️ Nota de seguridad
+
+`.env.local` ya estaba versionado en este repo (con URL y anon key reales de Supabase)
+antes de este cambio — no lo toqué, pero vale la pena que lo saques del historial de
+git y regeneres la anon key si el repo es público o el acceso no es de confianza total.

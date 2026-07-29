@@ -6,12 +6,12 @@ export const metadata: Metadata = {
     default: "Campus360 — Toda tu universidad, en un lugar",
     template: "%s · Campus360",
   },
-  description: "Plataforma de acompañamiento universitario — Universidad Fidélitas. Tutorías, eventos, TCU, tesis, agenda y asistente IA en un solo lugar.",
+  description: "La súper-app de experiencia universitaria de la Universidad Fidélitas — eventos, TCU, tutorías, amigos y el asistente Rasta en un solo lugar.",
   applicationName: "Campus360",
   manifest: "/manifest.json",
   openGraph: {
     title: "Campus360 — Toda tu universidad, en un lugar",
-    description: "Plataforma de acompañamiento universitario de la Universidad Fidélitas.",
+    description: "La súper-app de experiencia universitaria de la Universidad Fidélitas.",
     siteName: "Campus360",
     locale: "es_CR",
     type: "website",
@@ -22,7 +22,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#2B6477",
+  themeColor: "#152238",
 };
 
 export default function RootLayout({
@@ -36,7 +36,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
